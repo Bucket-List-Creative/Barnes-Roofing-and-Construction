@@ -317,6 +317,89 @@ document.addEventListener('DOMContentLoaded', async function() {
     // preserve ordering (React before ReactDOM before Babel before text/babel).
     const doc = new DOMParser().parseFromString(template, 'text/html');
 
+    // Promote the real, D3-generated county geometry out of the scripted
+    // srcdoc frame so it also works from file:// and on restrictive hosts.
+    const serviceMapFrame = doc.querySelector('iframe[title^="Service area map"]');
+    if (serviceMapFrame) {
+      const mapMarkup = "<svg sc-camel-view-box=\"0 0 640 560\" width=\"100%\" style=\"display:block\" role=\"img\" aria-label=\"Service area map — St. Louis metro counties, shop in Cottleville\"><g><path d=\"M65.803,118.69L91.102,119.061L91.102,144.648L117.606,145.018L116.402,170.583L168.205,171.324L165.795,310.259L151.339,303.991L135.677,284.072L109.173,288.5L77.85,278.537L77.85,269.309L47.732,241.24L30.866,244.935L14,240.501L15.205,182.433L65.803,182.803Z\" fill=\"transparent\" stroke=\"#142a86\" stroke-width=\"1.25\" stroke-linejoin=\"round\"></path><path d=\"M403.126,316.895L428.425,282.965L428.425,261.925L588.654,264.14L588.654,366.983L589.858,450.774L523.598,450.407L515.165,427.644L518.78,412.949L477.819,412.582L477.819,406.335L440.472,368.455L441.677,362.199L401.921,321.686Z\" fill=\"transparent\" stroke=\"#142a86\" stroke-width=\"1.25\" stroke-linejoin=\"round\"></path><path d=\"M30.866,244.935L47.732,241.24L77.85,269.309L77.85,278.537L109.173,288.5L135.677,284.072L151.339,303.991L165.795,310.259L189.89,313.209L229.646,289.976L244.102,270.786L242.898,344.896L242.898,366.983L233.26,418.093L228.441,457.38L122.425,457.38L30.866,457.38L30.866,454.811Z\" fill=\"transparent\" stroke=\"#142a86\" stroke-width=\"1.25\" stroke-linejoin=\"round\"></path><path d=\"M434.449,213.515L418.787,235.327L428.425,261.925L428.425,282.965L403.126,316.895L389.874,303.991L382.646,287.762L388.669,263.771L405.535,236.805Z\" fill=\"transparent\" stroke=\"#142a86\" stroke-width=\"1.25\" stroke-linejoin=\"round\"></path><path d=\"M440.472,115.351L591.063,116.093L611.543,115.722L611.543,169.843L624.795,169.472L624.795,226.086L626,263.771L588.654,264.14L428.425,261.925L418.787,235.327L434.449,213.515L450.11,199.458L451.315,180.581L405.535,150.207L397.102,148.725L398.307,115.722Z\" fill=\"transparent\" stroke=\"#142a86\" stroke-width=\"1.25\" stroke-linejoin=\"round\"></path><path d=\"M67.008,55.186L92.307,55.557L92.307,17.243L247.717,18.732L251.331,48.493L260.969,77.483L250.126,90.853L263.378,122.399L266.992,143.906L260.969,151.69L246.512,147.613L220.008,153.913L218.803,168.361L179.047,163.916L176.638,164.657L174.228,164.287L168.205,171.324L116.402,170.583L117.606,145.018L91.102,144.648L91.102,119.061L65.803,118.69Z\" fill=\"transparent\" stroke=\"#142a86\" stroke-width=\"1.25\" stroke-linejoin=\"round\"></path><path d=\"M375.417,378.757L391.079,362.199L401.921,321.686L441.677,362.199L440.472,368.455L477.819,406.335L477.819,412.582L518.78,412.949L515.165,427.644L523.598,450.407L477.819,449.306L477.819,486.72L419.992,506.876L405.535,490.019L392.283,471.687L370.598,453.343L364.575,427.644L365.78,398.983Z\" fill=\"transparent\" stroke=\"#142a86\" stroke-width=\"1.25\" stroke-linejoin=\"round\"></path><path d=\"M244.102,270.786L266.992,250.107L309.157,250.476L311.567,231.262L324.819,222.389L341.685,189.836L368.189,189.836L379.031,164.657L389.874,163.916L404.331,179.471L428.425,193.907L442.882,189.096L450.11,199.458L434.449,213.515L405.535,236.805L388.669,263.771L382.646,287.762L389.874,303.991L403.126,316.895L401.921,321.686L391.079,362.199L375.417,378.757L376.622,350.419L351.323,349.314L353.732,330.162L291.087,330.162L283.858,343.054L268.197,339.739L262.173,353.733L256.15,343.054L242.898,344.896Z\" fill=\"transparent\" stroke=\"#142a86\" stroke-width=\"1.25\" stroke-linejoin=\"round\"></path><path d=\"M168.205,171.324L174.228,164.287L176.638,164.657L179.047,163.916L218.803,168.361L220.008,153.913L246.512,147.613L260.969,151.69L266.992,143.906L279.039,162.435L293.496,172.065L306.748,169.472L320,157.618L330.843,133.155L338.071,129.446L353.732,131.672L386.26,148.354L397.102,148.725L405.535,150.207L451.315,180.581L450.11,199.458L442.882,189.096L428.425,193.907L404.331,179.471L389.874,163.916L379.031,164.657L368.189,189.836L341.685,189.836L324.819,222.389L311.567,231.262L309.157,250.476L266.992,250.107L244.102,270.786L229.646,289.976L189.89,313.209L165.795,310.259Z\" fill=\"#e9edfb\" stroke=\"#142a86\" stroke-width=\"1.25\" stroke-linejoin=\"round\"></path><path d=\"M242.898,344.896L256.15,343.054L262.173,353.733L268.197,339.739L283.858,343.054L291.087,330.162L353.732,330.162L351.323,349.314L376.622,350.419L375.417,378.757L365.78,398.983L364.575,427.644L370.598,453.343L392.283,471.687L405.535,490.019L391.079,506.876L379.031,504.311L350.118,526.286L293.496,542.757L283.858,537.634L285.063,514.568L275.425,511.638L260.969,500.647L228.441,457.38L233.26,418.093L242.898,366.983Z\" fill=\"transparent\" stroke=\"#142a86\" stroke-width=\"1.25\" stroke-linejoin=\"round\"></path><g text-anchor=\"middle\" font-size=\"12\" font-weight=\"600\" letter-spacing=\"0.08em\" fill=\"#142a86\" font-family=\"Barlow,system-ui,sans-serif\"><text transform=\"translate(100.6,217.1)\">WARREN</text><text transform=\"translate(513.9,343.5)\">ST. CLAIR</text><text transform=\"translate(129,368.9)\">FRANKLIN</text><text transform=\"translate(423.4,268.5)\" font-size=\"9\">ST. LOUIS CITY</text><text transform=\"translate(521.6,188.7)\">MADISON</text><text transform=\"translate(167.8,90.7)\">LINCOLN</text><text transform=\"translate(430.2,425.1)\">MONROE</text><text transform=\"translate(340.4,280.1)\">ST. LOUIS CO.</text><text transform=\"translate(253.8,195.4)\">ST. CHARLES</text><text transform=\"translate(309.8,432.4)\">JEFFERSON</text></g><circle cx=\"270.37\" cy=\"225.02\" r=\"5\" fill=\"#1d3fc0\"></circle><circle cx=\"270.37\" cy=\"225.02\" r=\"11\" fill=\"none\" stroke=\"#1d3fc0\" stroke-dasharray=\"3 3\"></circle><text x=\"270.37\" y=\"255.02\" text-anchor=\"middle\" font-size=\"11\" font-weight=\"700\" letter-spacing=\"0.1em\" fill=\"#1d3fc0\" font-family=\"Barlow,system-ui,sans-serif\">THE SHOP — COTTLEVILLE</text></g></svg>";
+      const mapSvg = new DOMParser().parseFromString(
+        mapMarkup.replace('sc-camel-view-box', 'viewBox'), 'image/svg+xml'
+      ).documentElement;
+      mapSvg.setAttribute('style', 'display:block;width:100%;height:auto;overflow:hidden');
+      serviceMapFrame.replaceWith(mapSvg);
+
+      const names = ['Warren','St. Clair','Franklin','St. Louis City','Madison','Lincoln','Monroe','St. Louis Co.','St. Charles','Jefferson'];
+      const paths = Array.from(mapSvg.querySelectorAll('path')).slice(0, 10);
+      const group = mapSvg.querySelector('g');
+      const figure = mapSvg.parentElement;
+      const labels = Array.from(group.querySelectorAll('g text')).slice(0, 10);
+      let selected = null, frame = 0, view = { x: 0, y: 0, k: 1 };
+
+      const out = doc.createElement('button');
+      out.type = 'button';
+      out.setAttribute('aria-label', 'Zoom out to full service area');
+      out.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"></circle><path d="M8 11h6M16.5 16.5 21 21"></path></svg><span>ZOOM OUT</span>';
+      out.style.cssText = 'position:absolute;z-index:3;top:34px;right:34px;display:none;align-items:center;gap:8px;background:#1d3fc0;color:#fff;border:1px solid #142a86;padding:8px 14px;font:600 11px/1 Barlow,system-ui,sans-serif;letter-spacing:.12em;cursor:pointer';
+      figure.appendChild(out);
+
+      const badge = doc.createElement('div');
+      badge.style.cssText = 'position:absolute;z-index:3;left:38px;right:38px;bottom:58px;display:none;background:#1d3fc0;color:#fff;padding:9px 12px;text-align:center;font:700 11px/1.25 Barlow,system-ui,sans-serif;letter-spacing:.1em';
+      figure.appendChild(badge);
+
+      function move(target) {
+        if (frame) cancelAnimationFrame(frame);
+        const start = { ...view }, began = performance.now();
+        function tick(now) {
+          const p = Math.min(1, (now - began) / 650), e = 1 - Math.pow(1 - p, 3);
+          view = { x:start.x+(target.x-start.x)*e, y:start.y+(target.y-start.y)*e, k:start.k+(target.k-start.k)*e };
+          group.setAttribute('transform','translate('+view.x+','+view.y+') scale('+view.k+')');
+          frame = p < 1 ? requestAnimationFrame(tick) : 0;
+        }
+        frame = requestAnimationFrame(tick);
+      }
+      function reset() {
+        selected = null; move({x:0,y:0,k:1});
+        paths.forEach((path,i) => {
+          path.setAttribute('fill', i===8 ? '#e9edfb' : 'transparent');
+          path.setAttribute('opacity','1'); path.setAttribute('stroke-width','1.25');
+        });
+        labels.forEach((label,i) => {
+          label.setAttribute('opacity','1');
+          label.setAttribute('font-size',i===3?'9':'12');
+        });
+        out.style.display='none'; badge.style.display='none';
+      }
+      function zoom(path,index) {
+        if (selected===path) { reset(); return; }
+        selected=path;
+        const b=path.getBBox(), k=Math.min(4,.75/Math.max(b.width/640,b.height/560));
+        move({x:320-k*(b.x+b.width/2),y:280-k*(b.y+b.height/2),k});
+        paths.forEach(other => {
+          const active=other===path;
+          other.setAttribute('fill',active?'#e9edfb':'transparent');
+          other.setAttribute('opacity',active?'1':'.35');
+          other.setAttribute('stroke-width',String((active?1.6:1)/k));
+        });
+        labels.forEach((label,i) => {
+          label.setAttribute('opacity',i===index?'1':'.15');
+          label.setAttribute('font-size',String((i===index?14:11)/k));
+        });
+        badge.textContent=names[index].toUpperCase()+' — COVERED, OWNER ON SITE';
+        badge.style.display='block'; out.style.display='flex';
+      }
+      paths.forEach((path,index) => {
+        path.setAttribute('role','button'); path.setAttribute('tabindex','0');
+        path.setAttribute('aria-label','Zoom to '+names[index]);
+        path.setAttribute('style','cursor:pointer;transition:fill .25s ease,opacity .25s ease');
+        path.addEventListener('mouseenter',()=>{if(!selected)path.setAttribute('fill','#e9edfb')});
+        path.addEventListener('mouseleave',()=>{if(!selected&&index!==8)path.setAttribute('fill','transparent')});
+        path.addEventListener('click',()=>zoom(path,index));
+        path.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();zoom(path,index)}});
+      });
+      mapSvg.addEventListener('click',event=>{if(event.target===mapSvg&&selected)reset()});
+      out.addEventListener('click',reset);
+    }
+
     document.documentElement.replaceWith(doc.documentElement);
 
     // Resolve page-frame markers: mint this document's own blob for each
