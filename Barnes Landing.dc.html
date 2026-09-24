@@ -488,6 +488,29 @@ class Component extends DCLogic {
     this.run();
     this.measure();
 
+    const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.heroVideo = document.querySelector('.hero-video');
+    if (this.heroVideo && !reduceMotion) {
+      const video = this.heroVideo;
+      video.muted = true;
+      video.defaultMuted = true;
+      video.loop = true;
+      video.autoplay = true;
+      video.playsInline = true;
+      video.setAttribute('muted', '');
+      video.setAttribute('loop', '');
+      this.playHeroVideo = () => {
+        const attempt = video.play();
+        if (attempt) attempt.catch(() => {});
+      };
+      this.onHeroVideoEnded = () => { video.currentTime = 0; this.playHeroVideo(); };
+      this.onHeroVisibility = () => { if (!document.hidden && video.paused) this.playHeroVideo(); };
+      video.addEventListener('canplay', this.playHeroVideo, { once: true });
+      video.addEventListener('ended', this.onHeroVideoEnded);
+      document.addEventListener('visibilitychange', this.onHeroVisibility);
+      this.playHeroVideo();
+    }
+
     window.addEventListener('keydown', this.onKey);
     this.bwTimer = setInterval(() => this.setState(s => ({ bw: ((s.bw || 0) + 1) % 5 })), 2600);
     try {
@@ -503,6 +526,9 @@ class Component extends DCLogic {
     window.removeEventListener('keydown', this.onKey);
     clearInterval(this.bwTimer);
     window.removeEventListener('message', this.onMsg);
+    if (this.heroVideo && this.playHeroVideo) this.heroVideo.removeEventListener('canplay', this.playHeroVideo);
+    if (this.heroVideo && this.onHeroVideoEnded) this.heroVideo.removeEventListener('ended', this.onHeroVideoEnded);
+    if (this.onHeroVisibility) document.removeEventListener('visibilitychange', this.onHeroVisibility);
     (this.timers || []).forEach(clearTimeout);
     if (this.io) this.io.disconnect();
   }
