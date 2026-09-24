@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Barnes — Service area map</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,600;125,700&family=Inter:wght@400;500&display=swap">
+<script src="https://unpkg.com/d3@7.9.0/dist/d3.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/topojson-client@3.1.0/dist/topojson-client.min.js" integrity="sha384-Ukv1p/xTma6P4/2bY5KzWBw+ydSpXmhCMtyciIQVDJ1RmOxtCYNMF1uXT9T63H67" crossorigin="anonymous"></script>
+<style>
+html,body{margin:0;height:100%;background:transparent;overflow:hidden;font-family:Inter,system-ui,sans-serif}
+#wrap{position:relative;width:100%;height:100%}
+svg{display:block;width:100%;height:100%}
+.lbl{font-family:Archivo,sans-serif;font-stretch:125%;font-weight:700;letter-spacing:.1em;text-transform:uppercase;fill:#161826;pointer-events:none;paint-order:stroke;stroke:#a9a7a7;stroke-width:3px;stroke-linejoin:round}
+.county{cursor:pointer;transition:fill .2s}
+.county:hover{fill:rgba(0,53,204,.32)}
+.county:focus-visible{outline:none;stroke:#0035cc;stroke-width:3px}
+#badge{position:absolute;left:14px;top:14px;display:none;flex-direction:column;gap:6px;max-width:280px;padding:12px 14px;background:#161826;color:#e9e9ed;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.35)}
+#badge.on{display:flex}
+#badge b{font-family:Archivo,sans-serif;font-stretch:125%;font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+#badge span{font-size:12px;color:#b9bac4}
+#badge button{align-self:flex-start;margin-top:4px;font:500 12px Inter,sans-serif;color:#e9e9ed;background:transparent;border:1px solid #e9e9ed;border-radius:8px;padding:5px 10px;cursor:pointer}
+#badge button:hover{background:rgba(233,233,237,.12)}
+#badge button:focus-visible{outline:2px solid #9184d9;outline-offset:2px}
+#err{position:absolute;inset:0;display:none;align-items:center;justify-content:center;font-size:13px;color:#161826}
+</style>
+</head>
+<body>
+<div id="wrap">
+  <svg id="map" viewBox="0 0 800 640" role="img" aria-label="Map of St. Louis metro counties covered by Barnes Roofing"></svg>
+  <div id="badge" role="status"><b id="bname"></b><span>Covered, owner on site</span><span>Click again or outside to zoom out</span><button id="zout" type="button">Zoom out</button></div>
+  <div id="err">Map unavailable — see county list.</div>
+</div>
+<script>
+const COVERED = {
+  '29219':'Warren','29113':'Lincoln','29183':'St. Charles','29189':'St. Louis Co.','29510':'St. Louis City',
+  '29071':'Franklin','29099':'Jefferson','17119':'Madison','17163':'St. Clair','17133':'Monroe'
+};
+const SHOP = [-90.654, 38.746];
+const W = 800, H = 640;
+const svg = d3.select('#map');
+const root = svg.append('g');
+let focused = null;
+
+fetch('https://cdn.jsdelivr.net/npm/us-atlas@3.0.1/counties-10m.json').then(r => r.json()).then(topo => {
+  const all = topojson.feature(topo, topo.objects.counties).features.filter(f => /^(29|17)/.test(f.id));
+  const cov = all.filter(f => COVERED[f.id]);
+  const proj = d3.geoMercator().fitExtent([[40, 30], [W - 40, H - 30]], {type: 'FeatureCollection', features: cov});
+  const path = d3.geoPath(proj);
+  const [[x0, y0], [x1, y1]] = [[-40, -40], [W + 40, H + 40]];
+  const ctx = all.filter(f => { const [cx, cy] = path.centroid(f); return cx > x0 && cx < x1 && cy > y0 && cy < y1 && !COVERED[f.id]; });
+
+  root.append('rect').attr('width', W).attr('height', H).attr('fill', 'transparent').on('click', zoomOut);
+  root.append('g').selectAll('path').data(ctx).join('path').attr('d', path)
+    .attr('fill', 'none').attr('stroke', '#161826').attr('stroke-opacity', .22).attr('stroke-width', .8).attr('vector-effect', 'non-scaling-stroke');
+  root.append('g').selectAll('path').data(cov).join('path').attr('class', 'county').attr('d', path)
+    .attr('fill', 'rgba(0,53,204,.16)').attr('stroke', '#161826').attr('stroke-width', 1.2).attr('vector-effect', 'non-scaling-stroke')
+    .attr('tabindex', 0).attr('role', 'button').attr('aria-label', f => COVERED[f.id] + ' — covered')
+    .on('click', (e, f) => { e.stopPropagation(); focused === f ? zoomOut() : zoomTo(f); })
+    .on('keydown', (e, f) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); focused === f ? zoomOut() : zoomTo(f); } });
+  // Mississippi: the MO / IL state line
+  const river = topojson.mesh(topo, topo.objects.states, (a, b) => a !== b && ((a.id === '29' && b.id === '17') || (a.id === '17' && b.id === '29')));
+  root.append('path').attr('d', path(river)).attr('fill', 'none').attr('stroke', '#0035cc').attr('stroke-width', 3).attr('vector-effect', 'non-scaling-stroke').attr('pointer-events', 'none');
+
+  const offsets = {'29510': [26, 4], '29189': [-14, -6]};
+  const labels = root.append('g').selectAll('text').data(cov).join('text').attr('class', 'lbl')
+    .attr('text-anchor', f => f.id === '29510' ? 'start' : 'middle')
+    .attr('x', f => path.centroid(f)[0] + (offsets[f.id] || [0, 0])[0])
+    .attr('y', f => path.centroid(f)[1] + (offsets[f.id] || [0, 0])[1])
+    .attr('font-size', 11).text(f => COVERED[f.id]);
+  const city = cov.find(f => f.id === '29510'), cc = path.centroid(city);
+  const leader = root.append('line').attr('x1', cc[0] + 3).attr('y1', cc[1]).attr('x2', cc[0] + 23).attr('y2', cc[1]).attr('stroke', '#161826').attr('stroke-width', 1).attr('vector-effect', 'non-scaling-stroke');
+
+  const [sx, sy] = proj(SHOP);
+  const shop = root.append('g').attr('transform', `translate(${sx},${sy})`).attr('pointer-events', 'none');
+  const dot = shop.append('circle').attr('r', 5).attr('fill', '#0035cc').attr('stroke', '#e9e9ed').attr('stroke-width', 2).attr('vector-effect', 'non-scaling-stroke');
+  const shopLbl = shop.append('text').attr('class', 'lbl').attr('x', 10).attr('y', 18).attr('font-size', 10).text('The shop — Cottleville');
+
+  function apply(k, tx, ty) {
+    root.transition().duration(750).ease(d3.easeCubicInOut).attr('transform', `translate(${tx},${ty}) scale(${k})`);
+    labels.transition().duration(750).attr('font-size', 11 / k).attr('stroke-width', 3 / k);
+    shopLbl.transition().duration(750).attr('font-size', 10 / k).attr('x', 10 / k).attr('y', 18 / k).attr('stroke-width', 3 / k);
+    dot.transition().duration(750).attr('r', 5 / k);
+  }
+  function zoomTo(f) {
+    focused = f;
+    const [[a, b], [c, d]] = path.bounds(f);
+    const k = Math.min(6, 0.7 / Math.max((c - a) / W, (d - b) / H));
+    apply(k, W / 2 - k * (a + c) / 2, H / 2 - k * (b + d) / 2);
+    document.getElementById('bname').textContent = COVERED[f.id];
+    document.getElementById('badge').classList.add('on');
+  }
+  function zoomOut() {
+    focused = null; apply(1, 0, 0);
+    document.getElementById('badge').classList.remove('on');
+  }
+  window.zoomOut = zoomOut;
+  document.getElementById('zout').onclick = zoomOut;
+}).catch(() => { document.getElementById('err').style.display = 'flex'; });
+function zoomOut() {}
+</script>
+</body>
+</html>

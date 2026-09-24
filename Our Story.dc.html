@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/nocturne-f7d57233-40ac-4782-8baf-b63aefc19781/styles.css">
+<script src="_ds/nocturne-f7d57233-40ac-4782-8baf-b63aefc19781/_ds_bundle.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,600;125,700;125,800&amp;display=swap">
+<style>
+:root{--space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:20px;--space-6:24px;--space-8:32px}
+body{margin:0;background:#9c9a9a;color:#161826;font-family:var(--font-body)}
+a{color:inherit;text-decoration:none}
+a:hover{color:inherit}
+</style>
+</helmet>
+<div style="position:relative;min-height:100vh;background:#9c9a9a;color:#161826">
+
+  <header data-screen-label="Header" style="position:sticky;top:0;z-index:100;height:92px;background:radial-gradient(90% 70% at 50% 45%, #0a45e0 0%, #0035cc 55%, #002aa8 100%);background-color:#0035cc;box-shadow:0 8px 24px rgba(0,0,0,.35);color:#e9e9ed">
+    <div style="position:relative;height:100%;display:flex;align-items:center;gap:var(--space-4);padding:0 clamp(16px,4vw,48px)">
+      <a href="Barnes Landing.dc.html" aria-label="Barnes Roofing and Construction, home" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:6px">
+        <img src="assets/barnes-mark.png" alt="" style="display:block;height:48px;width:auto">
+        <img src="assets/barnes-wordmark.png" alt="Barnes Roofing and Construction" style="display:block;width:78px;height:auto">
+      </a>
+      <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
+        <nav aria-label="Main" style="flex:1;min-width:0;display:flex;align-items:center;gap:var(--space-2)">
+          <sc-for list="{{ mainLinks }}" as="l" hint-placeholder-count="3">
+            <a href="{{ l.href }}" onMouseEnter="{{ l.enter }}" onMouseLeave="{{ l.leave }}" style="display:inline-flex;align-items:center;gap:4px;white-space:nowrap;padding:10px 14px;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#c9cbe0;border-radius:var(--radius-sm)" style-hover="background:rgba(255,255,255,.1);color:#e9e9ed">{{ l.label }}<i class="{{ l.caret }}" style="font-size:11px"></i></a>
+          </sc-for>
+        </nav>
+        <div style="flex:none;width:170px"></div>
+        <div style="flex:1;min-width:0;display:flex;align-items:center;justify-content:flex-end;gap:var(--space-4)">
+          <a href="Our Story.dc.html" style="white-space:nowrap;padding:10px 12px;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#f5f5f7;border-radius:var(--radius-sm)" style-hover="background:rgba(255,255,255,.1);color:#e9e9ed">Our story</a>
+          <a href="tel:+13142037003" style="display:flex;flex-direction:column;align-items:flex-end;gap:2px;white-space:nowrap;color:#e9e9ed" style-hover="color:#ffffff">
+                        <span style="display:flex;align-items:center;gap:var(--space-2);font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:14px;letter-spacing:.04em;font-variant-numeric:tabular-nums"><i class="ph ph-phone" style="font-size:15px"></i>(314) 203-7003</span>
+          </a>
+          <a href="{{ estimateHref }}" style="display:inline-flex;align-items:center;gap:var(--space-2);white-space:nowrap;padding:13px 22px;border:1px solid #e9e9ed;border-radius:var(--radius-sm);font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:12px;letter-spacing:.12em;text-transform:uppercase;letter-spacing:.16em;color:#e9e9ed" style-hover="background:rgba(255,255,255,.12);color:#e9e9ed">Free estimate<i class="ph ph-arrow-right"></i></a>
+        </div>
+      </sc-if>
+      <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
+        <a href="tel:+13142037003" aria-label="Call us" style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;color:#e9e9ed"><i class="ph ph-phone" style="font-size:22px"></i></a>
+        <div style="flex:1"></div>
+        <button type="button" aria-label="Menu" onClick="{{ toggleMenu }}" style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:transparent;border:0;color:#e9e9ed;cursor:pointer"><i class="{{ menuIcon }}" style="font-size:22px"></i></button>
+      </sc-if>
+    </div>
+  </header>
+  <sc-if value="{{ ddOpen }}" hint-placeholder-val="{{ false }}">
+    <div onMouseEnter="{{ ddEnter }}" onMouseLeave="{{ ddLeave }}" style="position:fixed;left:clamp(16px,4vw,48px);top:92px;z-index:120;width:min(560px,calc(100vw - 32px));padding-top:10px">
+      <div role="menu" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-2);padding:var(--space-3);background:#161826;color:#f5f5f7;border:1px solid rgba(245,245,247,.14);border-radius:var(--radius-md);box-shadow:0 24px 60px rgba(0,0,0,.4)">
+        <sc-for list="{{ ddItems }}" as="d" hint-placeholder-count="0">
+          <a href="{{ d.href }}" role="menuitem" style="display:grid;grid-template-columns:64px minmax(0,1fr);gap:var(--space-3);align-items:center;padding:var(--space-2);border-radius:var(--radius-sm)" style-hover="background:rgba(245,245,247,.08)">
+            <span style="width:64px;height:48px;border-radius:6px;overflow:hidden;background:#23253a"><span style="display:block;width:100%;height:100%;background-image:{{ d.bg }};background-size:cover;background-position:center"></span></span>
+            <span style="display:flex;flex-direction:column;gap:2px;min-width:0"><span style="font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-size:12px;color:#f5f5f7">{{ d.title }}</span><span style="font-size:12px;color:#9fa1b0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ d.tag }}</span></span>
+          </a>
+        </sc-for>
+        <a href="{{ ddAll }}" style="grid-column:1 / -1;display:flex;align-items:center;justify-content:space-between;padding:var(--space-3);margin-top:var(--space-1);border-top:1px solid rgba(245,245,247,.12);font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-size:11px;color:#c9cbe0" style-hover="color:#f5f5f7">Compare all services<i class="ph ph-arrow-right"></i></a>
+      </div>
+    </div>
+  </sc-if>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;left:0;right:0;top:92px;z-index:99;max-height:calc(100vh - 92px);overflow-y:auto;overscroll-behavior:contain;box-sizing:border-box;display:flex;flex-direction:column;gap:var(--space-2);padding:var(--space-6) clamp(16px,4vw,48px) var(--space-8);background:#161826;color:#e9e9ed;box-shadow:0 20px 40px rgba(0,0,0,.35)">
+      <sc-for list="{{ menuLinks }}" as="l" hint-placeholder-count="7">
+        <a href="{{ l.href }}" style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-4) 0;border-bottom:1px solid rgba(245,245,247,.12);font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-size:14px">{{ l.label }}<i class="ph ph-arrow-right"></i></a>
+      </sc-for>
+      <a href="{{ estimateHref }}" style="margin-top:var(--space-4);display:flex;align-items:center;justify-content:center;gap:var(--space-2);padding:16px;border:1px solid #e9e9ed;border-radius:var(--radius-sm);font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:12px;letter-spacing:.12em;text-transform:uppercase">Free estimate</a>
+    </div>
+  </sc-if>
+
+  <main>
+    <section data-screen-label="Story hero" style="padding:clamp(48px,9vh,110px) clamp(16px,4vw,48px) clamp(56px,10vh,120px)">
+      <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(40px,6vw,96px);align-items:center">
+        <div style="display:flex;flex-direction:column;gap:var(--space-6)">
+          <nav aria-label="Breadcrumb" style="display:flex;align-items:center;gap:var(--space-2);font-size:13px;color:#23253a"><a href="Barnes Landing.dc.html" style="text-decoration:underline;text-underline-offset:3px" style-hover="color:#0035cc">Home</a><i class="ph ph-caret-right" style="font-size:11px"></i><span aria-current="page" style="color:#161826;font-weight:500">Our story</span></nav>
+          <div style="font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase">Our story</div>
+          <h1 style="margin:0;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:800;font-size:clamp(48px,7vw,112px);line-height:.93;letter-spacing:-.02em;text-wrap:balance">Small on purpose.</h1>
+          <p style="margin:0;font-size:clamp(17px,1.35vw,20px);line-height:1.7;color:#23253a;text-wrap:pretty;max-width:48ch">Barnes Roofing &amp; Construction is a small, family-owned company in Cottleville, Missouri, built so every home gets real attention from the first conversation to the final inspection.</p>
+        </div>
+        <div style="padding:clamp(8px,1vw,12px);border-radius:var(--radius-lg);background:#0035cc;box-shadow:0 30px 70px rgba(0,42,168,.25)"><div style="aspect-ratio:4/5;border-radius:var(--radius-md);overflow:hidden;background:#161826"><img src="assets/work/family.jpg" alt="Tony Barnes with his wife, son and dog" style="display:block;width:100%;height:100%;object-fit:cover;object-position:center 38%"></div></div>
+      </div>
+    </section>
+
+    <section data-screen-label="Where it started" style="padding:clamp(56px,10vh,120px) clamp(16px,4vw,48px);background:#b3b1b1;border-top:1px solid #161826;border-bottom:1px solid #161826">
+      <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:clamp(40px,6vw,96px);align-items:center">
+        <div style="padding:clamp(8px,1vw,12px);border-radius:var(--radius-lg);background:#0035cc;box-shadow:0 30px 70px rgba(0,42,168,.25)"><div style="aspect-ratio:3/4;border-radius:var(--radius-md);overflow:hidden;background:#161826"><img src="assets/work/tony-roof.jpg" alt="Tony on a finished roof" style="display:block;width:100%;height:100%;object-fit:cover;object-position:center 30%"></div></div>
+        <div style="display:flex;flex-direction:column;gap:var(--space-6);max-width:600px">
+          <div style="font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#0035cc">Where it started</div>
+          <h2 style="margin:0;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:800;font-size:clamp(32px,4vw,56px);line-height:1;letter-spacing:-.01em;text-wrap:balance">A decade in the industry</h2>
+          <p style="margin:0;font-size:clamp(17px,1.35vw,20px);line-height:1.7;color:#23253a;text-wrap:pretty">I started in the roofing industry more than a decade ago with a small company. Over the years, I helped it grow as general manager into a business doing more than $20 million in work. We had a great team of people who cared about what they did.</p>
+          <p style="margin:0;font-size:clamp(17px,1.35vw,20px);line-height:1.7;color:#23253a;text-wrap:pretty">But as the company grew, I saw how having so many people involved in each project could make it harder to deliver the consistent quality and personal attention every homeowner deserves.</p>
+        </div>
+      </div>
+    </section>
+
+    <section data-screen-label="Why Barnes" style="padding:clamp(56px,10vh,120px) clamp(16px,4vw,48px)">
+      <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:clamp(40px,6vw,96px);align-items:center">
+        <div style="display:flex;flex-direction:column;gap:var(--space-6);max-width:600px">
+          <div style="font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#0035cc">Why Barnes</div>
+          <h2 style="margin:0;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:800;font-size:clamp(32px,4vw,56px);line-height:1;letter-spacing:-.01em;text-wrap:balance">Personally involved in every project</h2>
+          <p style="margin:0;font-size:clamp(17px,1.35vw,20px);line-height:1.7;color:#23253a;text-wrap:pretty">That experience shaped why I started Barnes Roofing &amp; Construction. I wanted to build a small, family-owned company where I could stay personally involved in every project, from the first conversation through the final inspection.</p>
+          <p style="margin:0;font-size:clamp(17px,1.35vw,20px);line-height:1.7;color:#23253a;text-wrap:pretty">That allows me to pay attention to the details, stand behind our work, and make sure every customer receives exceptional service.</p>
+        </div>
+        <div style="padding:clamp(8px,1vw,12px);border-radius:var(--radius-lg);background:#0035cc;box-shadow:0 30px 70px rgba(0,42,168,.25)"><div style="aspect-ratio:4/3;border-radius:var(--radius-md);overflow:hidden;background:#161826"><img src="assets/work/step-install.png" alt="The Barnes crew installing underlayment" style="display:block;width:100%;height:100%;object-fit:cover;object-position:center 40%"></div></div>
+      </div>
+    </section>
+
+    <section data-screen-label="Quote" style="padding:clamp(64px,12vh,140px) clamp(16px,4vw,48px);background:radial-gradient(120% 140% at 15% 0%, #0a45e0 0%, #0035cc 55%, #002aa8 100%);color:#f5f5f7">
+      <figure style="max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:var(--space-8)">
+        <i class="ph ph-quotes" style="font-size:48px;color:#c9d4ff"></i>
+        <blockquote style="margin:0;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:800;font-size:clamp(30px,4.2vw,64px);line-height:1.08;letter-spacing:-.01em;text-wrap:balance">We plan to always stay small so your home can always be our number one priority.</blockquote>
+        <figcaption style="display:flex;align-items:center;gap:var(--space-4)"><img src="assets/barnes-mark.png" alt="" style="height:44px;width:auto"><span style="display:flex;flex-direction:column;gap:2px"><span style="font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:800;font-size:18px">Tony Barnes</span><span style="font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-size:11px;letter-spacing:.16em;color:#c9d4ff">Founder</span></span></figcaption>
+      </figure>
+    </section>
+
+    <section data-screen-label="What we believe" style="padding:clamp(64px,12vh,140px) clamp(16px,4vw,48px)">
+      <div style="max-width:1280px;margin:0 auto;display:flex;flex-direction:column;gap:clamp(32px,5vw,56px)">
+        <div style="display:flex;flex-direction:column;gap:var(--space-6);max-width:720px">
+          <div style="font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#0035cc">What we believe</div>
+          <h2 style="margin:0;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:800;font-size:clamp(32px,4vw,56px);line-height:1;letter-spacing:-.01em;text-wrap:balance">Three promises we keep small enough to keep</h2>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:clamp(16px,2vw,24px)">
+          <sc-for list="{{ values }}" as="v" hint-placeholder-count="3">
+            <div style="display:flex;flex-direction:column;gap:var(--space-4);padding:clamp(28px,3vw,44px);background:#b3b1b1;border:1px solid #161826;border-radius:var(--radius-md)">
+              <span style="width:56px;height:56px;border-radius:999px;background:#0035cc;color:#f5f5f7;display:flex;align-items:center;justify-content:center"><i class="{{ v.icon }}" style="font-size:26px"></i></span>
+              <h3 style="margin:0;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:800;font-size:24px;line-height:1.15">{{ v.t }}</h3>
+              <p style="margin:0;font-size:16px;line-height:1.6;color:#23253a;text-wrap:pretty">{{ v.b }}</p>
+            </div>
+          </sc-for>
+        </div>
+        <p style="margin:0;font-size:clamp(17px,1.35vw,20px);line-height:1.7;color:#23253a;text-wrap:pretty;max-width:60ch">We're in this business because we enjoy helping people with their homes.</p>
+      </div>
+    </section>
+
+    <section data-screen-label="CTA" style="padding:0 clamp(16px,4vw,48px) clamp(64px,10vh,120px)">
+      <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:var(--space-8);align-items:center;padding:clamp(32px,5vw,64px);border-radius:var(--radius-lg);background:#161826;color:#f5f5f7">
+        <div style="display:flex;flex-direction:column;gap:var(--space-4)">
+          <h2 style="margin:0;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:800;font-size:clamp(32px,4.4vw,60px);line-height:1;letter-spacing:-.01em;text-wrap:balance">Let's look at your roof.</h2>
+          <p style="margin:0;max-width:48ch;font-size:17px;line-height:1.55;color:#c9cbe0">Free estimate, no pressure. We'll call you back within one business day.</p>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:var(--space-3);justify-content:flex-end">
+          <a href="Barnes Landing.dc.html#estimate" style="display:inline-flex;align-items:center;gap:var(--space-2);padding:18px 30px;border-radius:var(--radius-sm);background:#0035cc;color:#f5f5f7;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-size:13px;letter-spacing:.12em" style-hover="background:#0a45e0;color:#f5f5f7">Request my estimate<i class="ph ph-arrow-right"></i></a>
+          <a href="tel:+13142037003" style="display:inline-flex;align-items:center;gap:var(--space-2);padding:18px 30px;border-radius:var(--radius-sm);border:1px solid #f5f5f7;color:#f5f5f7;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-size:13px;letter-spacing:.12em" style-hover="background:rgba(245,245,247,.12);color:#f5f5f7"><i class="ph ph-phone"></i>(314) 203-7003</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer data-screen-label="Footer" style="position:relative;padding:clamp(300px,34vw,560px) clamp(16px,4vw,48px) clamp(16px,3vw,40px);background-color:#ffffff;overflow:hidden;background-repeat:no-repeat;color:#f5f5f7">
+    <img src="assets/footer-crew.png" alt="" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 12%;display:block;pointer-events:none">
+    <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg, rgba(22,24,38,0) 0%, rgba(22,24,38,0) 38%, rgba(22,24,38,.55) 60%, rgba(22,24,38,.78) 100%)"></div>
+    <div style="position:relative;max-width:1280px;margin:0 auto;display:flex;flex-direction:column;gap:clamp(20px,3vh,32px);padding:clamp(18px,2.2vw,28px) clamp(20px,3vw,40px);border-radius:var(--radius-lg);background:linear-gradient(135deg, rgba(255,255,255,.26) 0%, rgba(255,255,255,.12) 100%);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);border:1px solid rgba(255,255,255,.45);box-shadow:inset 0 1px 0 rgba(255,255,255,.6), 0 24px 60px rgba(0,0,0,.3);text-shadow:0 1px 3px rgba(0,0,0,.55)">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:clamp(20px,3vw,40px)">
+        <div style="display:flex;flex-direction:column;gap:var(--space-4);grid-column:span 1;min-width:0">
+          <img src="assets/barnes-logo-blue.png" alt="Barnes Roofing and Construction" style="width:104px;height:auto;border-radius:var(--radius-md)">
+          <p style="margin:0;max-width:34ch;font-size:14px;line-height:1.55;color:#e9e9ed">Family-owned roofing and construction for the St. Louis metro.</p>
+          <span style="align-self:flex-start;display:inline-flex;align-items:center;gap:var(--space-2);padding:5px 10px;border:1px solid rgba(245,245,247,.6);border-radius:999px;font-size:11px;letter-spacing:.08em"><i class="ph ph-shield-check"></i>Licensed &amp; insured · MO</span>
+        </div>
+        <nav aria-label="Site" style="display:flex;flex-direction:column;gap:var(--space-2)">
+          <div style="font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#d6d9ff">Explore</div>
+          <sc-for list="{{ footerLinks }}" as="l" hint-placeholder-count="5">
+            <a href="{{ l.href }}" style="font-size:14px;color:#f5f5f7" style-hover="text-decoration:underline">{{ l.label }}</a>
+          </sc-for>
+        </nav>
+        <div style="display:flex;flex-direction:column;gap:var(--space-2)">
+          <div style="font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#d6d9ff">Contact</div>
+          <a href="tel:+13142037003" style="font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:20px" style-hover="text-decoration:underline">(314) 203-7003</a>
+          <span style="font-size:14px;color:#e9e9ed">Mon–Sat · 7a–7p</span>
+          <address style="font-style:normal;font-size:14px;line-height:1.5;color:#e9e9ed">5377 State Hwy N Suite 552<br>Cottleville MO 63304</address>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:var(--space-4);align-items:flex-start">
+          <a href="{{ estimateHref }}" class="btn" style="white-space:nowrap;padding:16px 28px;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;background:#0035cc;border-color:#d6d9ff;color:#f5f5f7" style-hover="background:#002aa8;border-color:#002aa8">Get a free estimate<i class="ph ph-arrow-right"></i></a>
+        </div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--space-4);padding-top:var(--space-4);border-top:1px solid rgba(245,245,247,.3);font-size:12px;color:#e9e9ed">
+        <span>© 2026 Barnes Roofing &amp; Construction · Cottleville, Missouri</span>
+        <span>Family-owned, small on purpose</span>
+      </div>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const ORDER = [['Roof replacement', 'Roof Replacement.dc.html'], ['Roof repair', 'Roof Repair.dc.html'], ['Gutters', 'Gutters.dc.html'], ['Siding', 'Siding.dc.html']];
+class Component extends DCLogic {
+  state = { menu: false, w: typeof window !== 'undefined' ? window.innerWidth : 1280 };
+  componentDidMount() { this.onResize = () => this.setState({ w: window.innerWidth }); window.addEventListener('resize', this.onResize); }
+  componentWillUnmount() { window.removeEventListener('resize', this.onResize); }
+  ddLinks(arr) {
+    return arr.map((l, i) => ({ ...l, caret: i === 0 ? 'ph ph-caret-down' : '',
+      enter: i === 0 ? () => { clearTimeout(this.ddT); this.setState({ dd: true }); } : undefined,
+      leave: i === 0 ? () => { clearTimeout(this.ddT); this.ddT = setTimeout(() => this.setState({ dd: false }), 160); } : undefined }));
+  }
+  renderVals() {
+    const { w, menu } = this.state;
+    const L = (arr) => arr.map(([label, href]) => ({ label, href }));
+    return {
+      wide: w >= 1280, narrow: w < 1280, menuOpen: w < 1280 && menu,
+      menuIcon: menu ? 'ph ph-x' : 'ph ph-list', toggleMenu: () => this.setState(s => ({ menu: !s.menu })),
+      estimateHref: 'Barnes Landing.dc.html#estimate',
+      mainLinks: this.ddLinks(L([['Services', 'Barnes Landing.dc.html#services'], ['Recent work', 'Barnes Landing.dc.html#work'], ['Service area', 'Barnes Landing.dc.html#area']])),
+      ddOpen: !!this.state.dd && w >= 1280,
+      ddEnter: () => { clearTimeout(this.ddT); this.setState({ dd: true }); },
+      ddLeave: () => { clearTimeout(this.ddT); this.ddT = setTimeout(() => this.setState({ dd: false }), 160); },
+      ddAll: 'Barnes Landing.dc.html#services',
+      ddItems: [['Roof replacement', 'Tear-off to final shingle', 'Roof Replacement.dc.html', 'assets/work/step-finished.png'], ['Roof repair', 'Leaks, flashing, storm patches', 'Roof Repair.dc.html', 'assets/work/g-flashing.jpg'], ['Gutters', 'Seamless, sized to your roof', 'Gutters.dc.html', 'assets/work/g-a2.png'], ['Siding', 'Vinyl and fiber cement', 'Siding.dc.html', 'assets/work/ba-after.png']].map(([title, tag, href, img]) => ({ title, tag, href, img, bg: `url("${img}")` })),
+      menuLinks: L([['Home', 'Barnes Landing.dc.html'], ...ORDER, ['Recent work', 'Barnes Landing.dc.html#work'], ['Service area', 'Barnes Landing.dc.html#area'], ['Our story', 'Our Story.dc.html']]),
+      footerLinks: L([['Home', 'Barnes Landing.dc.html'], ...ORDER, ['Recent work', 'Barnes Landing.dc.html#work'], ['Service area', 'Barnes Landing.dc.html#area'], ['Our story', 'Our Story.dc.html']]),
+      values: [
+        { icon: 'ph ph-handshake', t: 'Personally involved', b: 'From the first conversation through the final inspection, on every project.' },
+        { icon: 'ph ph-magnifying-glass', t: 'Details matter', b: 'Staying small means paying attention to the details and standing behind our work.' },
+        { icon: 'ph ph-house-line', t: 'Your home first', b: 'We plan to always stay small, so every customer gets the care and service they deserve.' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

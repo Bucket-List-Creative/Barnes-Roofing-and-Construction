@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Barnes service area backdrop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,600;125,700;125,800&family=Inter:wght@400;500&display=swap">
+<script src="https://unpkg.com/d3@7.9.0/dist/d3.min.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/topojson-client@3.1.0/dist/topojson-client.min.js" crossorigin="anonymous"></script>
+<style>
+html,body{margin:0;height:100%;background:#9c9a9a;overflow:hidden;font-family:Inter,system-ui,sans-serif}
+svg{display:block;width:100%;height:100%}
+.lbl{font-family:Archivo,sans-serif;font-stretch:125%;font-weight:700;letter-spacing:.12em;text-transform:uppercase;fill:#161826;pointer-events:none;paint-order:stroke;stroke:#b3b1b1;stroke-linejoin:round}
+.county{cursor:pointer;transition:fill .25s}
+.county:hover{fill:rgba(0,53,204,.22)}
+.house{cursor:pointer}
+.house .shape{transform-box:fill-box;transform-origin:50% 100%;transform:scale(0);transition:transform 700ms cubic-bezier(.34,1.56,.64,1)}
+.on .house .shape{transform:scale(1)}
+.house:hover .shape{transform:scale(1.35)}
+.route{fill:none;stroke:#0035cc;stroke-opacity:.45;stroke-dasharray:3 5;stroke-dashoffset:400;transition:stroke-dashoffset 1800ms ease}
+.on .route{stroke-dashoffset:0}
+@keyframes pulse{0%{r:6;opacity:.7}100%{r:34;opacity:0}}
+.pulse{animation:pulse 2.4s ease-out infinite}
+#tip{position:absolute;pointer-events:none;display:none;transform:translate(-50%,calc(-100% - 18px));padding:8px 12px;background:#161826;color:#f5f5f7;border-radius:8px;box-shadow:0 10px 24px rgba(0,0,0,.3);white-space:nowrap}
+#tip b{display:block;font-family:Archivo,sans-serif;font-stretch:125%;font-weight:700;font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+#tip span{font-size:12px;color:#c9cbe0}
+</style>
+</head>
+<body>
+<svg id="map" role="img" aria-label="Map of the St. Louis metro counties Barnes Roofing covers, with towns marked by blue-roofed houses"></svg>
+<div id="tip"><b id="tn"></b><span id="tc"></span></div>
+<script>
+const COVERED = {'29219':'Warren','29113':'Lincoln','29183':'St. Charles','29189':'St. Louis Co.','29510':'St. Louis City','29071':'Franklin','29099':'Jefferson','17119':'Madison','17163':'St. Clair','17133':'Monroe'};
+const SHOP = [-90.654, 38.746];
+const TOWNS = [
+  ['St. Charles',-90.497,38.788,'St. Charles'],['O\u2019Fallon',-90.700,38.810,'St. Charles'],['Wentzville',-90.853,38.811,'St. Charles'],['St. Peters',-90.590,38.782,'St. Charles'],
+  ['Chesterfield',-90.577,38.663,'St. Louis Co.'],['Ballwin',-90.546,38.595,'St. Louis Co.'],['Kirkwood',-90.407,38.583,'St. Louis Co.'],['Clayton',-90.324,38.643,'St. Louis Co.'],['Florissant',-90.322,38.789,'St. Louis Co.'],['Fenton',-90.436,38.513,'St. Louis Co.'],
+  ['St. Louis',-90.215,38.617,'St. Louis City'],['Arnold',-90.377,38.433,'Jefferson'],['Festus',-90.395,38.221,'Jefferson'],['Hillsboro',-90.563,38.232,'Jefferson'],
+  ['Washington',-91.012,38.558,'Franklin'],['Union',-91.008,38.450,'Franklin'],['Pacific',-90.741,38.482,'Franklin'],['Warrenton',-91.141,38.811,'Warren'],['Troy',-90.981,38.979,'Lincoln'],
+  ['Alton',-90.184,38.891,'Madison'],['Edwardsville',-89.953,38.811,'Madison'],['Collinsville',-89.985,38.670,'Madison'],['Belleville',-89.984,38.520,'St. Clair'],['O\u2019Fallon, IL',-89.911,38.592,'St. Clair'],
+  ['Columbia',-90.201,38.444,'Monroe'],['Waterloo',-90.150,38.336,'Monroe']
+];
+const svg = d3.select('#map'), tip = document.getElementById('tip');
+let topo, api = null;
+fetch('https://cdn.jsdelivr.net/npm/us-atlas@3.0.1/counties-10m.json').then(r => r.json()).then(t => { topo = t; build(); });
+let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(build, 150); });
+addEventListener('message', e => {
+  const d = e.data || {}; if (!api) return;
+  if (d.type === 'barnes-play') svg.classed('on', true);
+  if (d.type === 'barnes-zoom') d.county ? api.zoomName(d.county) : api.zoomOut();
+});
+function build() {
+  if (!topo) return;
+  const W = innerWidth, H = innerHeight, wide = W >= 1160;
+  svg.selectAll('*').remove(); svg.attr('viewBox', `0 0 ${W} ${H}`).classed('on', false);
+  const all = topojson.feature(topo, topo.objects.counties).features.filter(f => /^(29|17)/.test(f.id));
+  const cov = all.filter(f => COVERED[f.id]);
+  const ext = wide ? [[W * 0.44, 90], [W - 40, H - 50]] : [[20, 70], [W - 20, H - 30]];
+  const proj = d3.geoMercator().fitExtent(ext, {type: 'FeatureCollection', features: cov});
+  const path = d3.geoPath(proj);
+  const root = svg.append('g');
+  root.append('rect').attr('x', -W).attr('y', -H).attr('width', W * 3).attr('height', H * 3).attr('fill', 'transparent').on('click', zoomOut);
+  const others = all.filter(f => !COVERED[f.id]);
+  root.append('g').selectAll('path').data(others).join('path').attr('d', path).attr('fill', '#a3a1a1').attr('stroke', '#b8b6b6').attr('stroke-width', 1).attr('vector-effect', 'non-scaling-stroke');
+  const counties = root.append('g').selectAll('path').data(cov).join('path').attr('class', 'county').attr('d', path)
+    .attr('fill', 'rgba(245,245,247,.55)').attr('stroke', '#161826').attr('stroke-width', 1).attr('vector-effect', 'non-scaling-stroke')
+    .on('click', (e, f) => { e.stopPropagation(); focused === f ? zoomOut() : zoomTo(f); });
+  const river = topojson.mesh(topo, topo.objects.states, (a, b) => a !== b && ((a.id === '29' && b.id === '17') || (a.id === '17' && b.id === '29')));
+  root.append('path').attr('d', path(river)).attr('fill', 'none').attr('stroke', '#0035cc').attr('stroke-width', 4).attr('stroke-linecap', 'round').attr('vector-effect', 'non-scaling-stroke').attr('pointer-events', 'none');
+  const labels = root.append('g').selectAll('text').data(cov).join('text').attr('class', 'lbl').attr('text-anchor', 'middle')
+    .attr('x', f => path.centroid(f)[0]).attr('y', f => path.centroid(f)[1] + (f.id === '29510' ? -18 : 22))
+    .attr('font-size', 10).attr('stroke-width', 3).attr('opacity', .8).text(f => COVERED[f.id]);
+  const [sx, sy] = proj(SHOP);
+  const housesG = root.append('g');
+  const hs = TOWNS.map(([n, lon, lat, c]) => { const [x, y] = proj([lon, lat]); return {n, c, x, y, d: Math.hypot(x - sx, y - sy)}; });
+  const house = housesG.selectAll('g').data(hs).join('g').attr('class', 'house').attr('transform', h => `translate(${h.x},${h.y})`)
+    .attr('tabindex', 0).attr('role', 'img').attr('aria-label', h => `${h.n}, ${h.c}`)
+    .on('mouseenter focus', (e, h) => showTip(e.currentTarget, h)).on('mouseleave blur', () => tip.style.display = 'none')
+    .on('click', (e, h) => { e.stopPropagation(); const f = cov.find(f => COVERED[f.id] === h.c); if (f) zoomTo(f); });
+  const inner = house.append('g').attr('class', 'hs');
+  const shape = inner.append('g').attr('class', 'shape').style('transition-delay', h => (400 + h.d * 3) + 'ms');
+  shape.append('ellipse').attr('cx', 0).attr('cy', 1).attr('rx', 10).attr('ry', 2.4).attr('fill', 'rgba(22,24,38,.28)');
+  shape.append('rect').attr('x', -7).attr('y', -9).attr('width', 14).attr('height', 10).attr('fill', '#f5f5f7').attr('stroke', '#161826').attr('stroke-width', 1);
+  shape.append('rect').attr('x', 3).attr('y', -18).attr('width', 2.6).attr('height', 6).attr('fill', '#161826');
+  shape.append('path').attr('d', 'M-10,-8 L0,-17 L10,-8 Z').attr('fill', '#0035cc').attr('stroke', '#002aa8').attr('stroke-width', 1).attr('stroke-linejoin', 'round');
+  shape.append('rect').attr('x', -1.8).attr('y', -5).attr('width', 3.6).attr('height', 6).attr('fill', '#0035cc');
+  const shop = root.append('g').attr('transform', `translate(${sx},${sy})`).attr('pointer-events', 'none');
+  const ss = shop.append('g').attr('class', 'ss');
+  ss.append('circle').attr('r', 7).attr('fill', '#0035cc').attr('stroke', '#f5f5f7').attr('stroke-width', 2.5);
+  ss.append('text').attr('class', 'lbl').attr('x', 12).attr('y', -10).attr('font-size', 11).attr('stroke-width', 3).text('The shop, Cottleville');
+  let focused = null, K = 1, TX = 0, TY = 0;
+  function apply(k, tx, ty) {
+    K = k; TX = tx; TY = ty; tip.style.display = 'none';
+    root.transition().duration(800).ease(d3.easeCubicInOut).attr('transform', `translate(${tx},${ty}) scale(${k})`);
+    inner.transition().duration(800).attr('transform', `scale(${1 / k})`);
+    ss.transition().duration(800).attr('transform', `scale(${1 / k})`);
+    labels.transition().duration(800).attr('font-size', 10 / k).attr('stroke-width', 3 / k);
+  }
+  function zoomTo(f) {
+    focused = f;
+    const [[a, b], [c, d]] = path.bounds(f);
+    const cx = wide ? (W * 0.44 + W) / 2 : W / 2, aw = wide ? W * 0.56 : W;
+    const k = Math.min(5, 0.6 / Math.max((c - a) / aw, (d - b) / H));
+    apply(k, cx - k * (a + c) / 2, H / 2 - k * (b + d) / 2);
+    counties.attr('fill', g => g === f ? 'rgba(0,53,204,.2)' : 'rgba(245,245,247,.55)');
+    parent.postMessage({type: 'barnes-focus', county: COVERED[f.id]}, '*');
+  }
+  function zoomOut() {
+    focused = null; apply(1, 0, 0); counties.attr('fill', 'rgba(245,245,247,.55)');
+    parent.postMessage({type: 'barnes-focus', county: null}, '*');
+  }
+  function showTip(el, h) {
+    const r = el.getBoundingClientRect();
+    document.getElementById('tn').textContent = h.n;
+    document.getElementById('tc').textContent = h.c + ', in our area';
+    tip.style.left = (r.left + r.width / 2) + 'px'; tip.style.top = r.top + 'px'; tip.style.display = 'block';
+  }
+  api = { zoomOut, zoomName: n => { const f = cov.find(f => COVERED[f.id] === n); if (f) zoomTo(f); } };
+  const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { svg.classed('on', true); io.disconnect(); } }, {threshold: .25});
+  io.observe(document.getElementById('map'));
+}
+</script>
+</body>
+</html>

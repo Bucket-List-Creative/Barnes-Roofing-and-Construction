@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/nocturne-f7d57233-40ac-4782-8baf-b63aefc19781/styles.css">
+<script src="_ds/nocturne-f7d57233-40ac-4782-8baf-b63aefc19781/_ds_bundle.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,600;125,700;125,800&amp;display=swap">
+<style>
+:root{--space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:20px;--space-6:24px;--space-8:32px}
+body{margin:0;background:#9c9a9a;color:#161826;font-family:var(--font-body)}
+a{color:inherit;text-decoration:none}
+a:hover{color:inherit}
+</style>
+</helmet>
+<div style="position:relative;min-height:100vh;background:#9c9a9a;color:#161826">
+
+  <header data-screen-label="Header" style="position:sticky;top:0;z-index:100;height:92px;background:radial-gradient(90% 70% at 50% 45%, #0a45e0 0%, #0035cc 55%, #002aa8 100%);background-color:#0035cc;box-shadow:0 8px 24px rgba(0,0,0,.35);color:#e9e9ed">
+    <div style="position:relative;height:100%;display:flex;align-items:center;gap:var(--space-4);padding:0 clamp(16px,4vw,48px)">
+      <a href="Barnes Landing.dc.html" aria-label="Barnes Roofing and Construction, home" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:6px">
+        <img src="assets/barnes-mark.png" alt="" style="display:block;height:48px;width:auto">
+        <img src="assets/barnes-wordmark.png" alt="Barnes Roofing and Construction" style="display:block;width:78px;height:auto">
+      </a>
+      <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
+        <nav aria-label="Main" style="flex:1;min-width:0;display:flex;align-items:center;gap:var(--space-2)">
+          <sc-for list="{{ mainLinks }}" as="l" hint-placeholder-count="3">
+            <a href="{{ l.href }}" onMouseEnter="{{ l.enter }}" onMouseLeave="{{ l.leave }}" style="display:inline-flex;align-items:center;gap:4px;white-space:nowrap;padding:10px 14px;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#c9cbe0;border-radius:var(--radius-sm)" style-hover="background:rgba(255,255,255,.1);color:#e9e9ed">{{ l.label }}<i class="{{ l.caret }}" style="font-size:11px"></i></a>
+          </sc-for>
+        </nav>
+        <div style="flex:none;width:170px"></div>
+        <div style="flex:1;min-width:0;display:flex;align-items:center;justify-content:flex-end;gap:var(--space-4)">
+          <a href="Our Story.dc.html" style="white-space:nowrap;padding:10px 12px;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#c9cbe0;border-radius:var(--radius-sm)" style-hover="background:rgba(255,255,255,.1);color:#e9e9ed">Our story</a>
+          <a href="tel:+13142037003" style="display:flex;flex-direction:column;align-items:flex-end;gap:2px;white-space:nowrap;color:#e9e9ed" style-hover="color:#ffffff">
+                        <span style="display:flex;align-items:center;gap:var(--space-2);font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:14px;letter-spacing:.04em;font-variant-numeric:tabular-nums"><i class="ph ph-phone" style="font-size:15px"></i>(314) 203-7003</span>
+          </a>
+          <a href="{{ estimateHref }}" style="display:inline-flex;align-items:center;gap:var(--space-2);white-space:nowrap;padding:13px 22px;border:1px solid #e9e9ed;border-radius:var(--radius-sm);font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:12px;letter-spacing:.12em;text-transform:uppercase;letter-spacing:.16em;color:#e9e9ed" style-hover="background:rgba(255,255,255,.12);color:#e9e9ed">Free estimate<i class="ph ph-arrow-right"></i></a>
+        </div>
+      </sc-if>
+      <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
+        <a href="tel:+13142037003" aria-label="Call us" style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;color:#e9e9ed"><i class="ph ph-phone" style="font-size:22px"></i></a>
+        <div style="flex:1"></div>
+        <button type="button" aria-label="Menu" onClick="{{ toggleMenu }}" style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:transparent;border:0;color:#e9e9ed;cursor:pointer"><i class="{{ menuIcon }}" style="font-size:22px"></i></button>
+      </sc-if>
+    </div>
+  </header>
+  <sc-if value="{{ ddOpen }}" hint-placeholder-val="{{ false }}">
+    <div onMouseEnter="{{ ddEnter }}" onMouseLeave="{{ ddLeave }}" style="position:fixed;left:clamp(16px,4vw,48px);top:92px;z-index:120;width:min(560px,calc(100vw - 32px));padding-top:10px">
+      <div role="menu" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-2);padding:var(--space-3);background:#161826;color:#f5f5f7;border:1px solid rgba(245,245,247,.14);border-radius:var(--radius-md);box-shadow:0 24px 60px rgba(0,0,0,.4)">
+        <sc-for list="{{ ddItems }}" as="d" hint-placeholder-count="0">
+          <a href="{{ d.href }}" role="menuitem" style="display:grid;grid-template-columns:64px minmax(0,1fr);gap:var(--space-3);align-items:center;padding:var(--space-2);border-radius:var(--radius-sm)" style-hover="background:rgba(245,245,247,.08)">
+            <span style="width:64px;height:48px;border-radius:6px;overflow:hidden;background:#23253a"><span style="display:block;width:100%;height:100%;background-image:{{ d.bg }};background-size:cover;background-position:center"></span></span>
+            <span style="display:flex;flex-direction:column;gap:2px;min-width:0"><span style="font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-size:12px;color:#f5f5f7">{{ d.title }}</span><span style="font-size:12px;color:#9fa1b0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ d.tag }}</span></span>
+          </a>
+        </sc-for>
+        <a href="{{ ddAll }}" style="grid-column:1 / -1;display:flex;align-items:center;justify-content:space-between;padding:var(--space-3);margin-top:var(--space-1);border-top:1px solid rgba(245,245,247,.12);font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-size:11px;color:#c9cbe0" style-hover="color:#f5f5f7">Compare all services<i class="ph ph-arrow-right"></i></a>
+      </div>
+    </div>
+  </sc-if>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;left:0;right:0;top:92px;z-index:99;max-height:calc(100vh - 92px);overflow-y:auto;overscroll-behavior:contain;box-sizing:border-box;display:flex;flex-direction:column;gap:var(--space-2);padding:var(--space-6) clamp(16px,4vw,48px) var(--space-8);background:#161826;color:#e9e9ed;box-shadow:0 20px 40px rgba(0,0,0,.35)">
+      <sc-for list="{{ menuLinks }}" as="l" hint-placeholder-count="7">
+        <a href="{{ l.href }}" style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-4) 0;border-bottom:1px solid rgba(245,245,247,.12);font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-size:14px">{{ l.label }}<i class="ph ph-arrow-right"></i></a>
+      </sc-for>
+      <a href="{{ estimateHref }}" style="margin-top:var(--space-4);display:flex;align-items:center;justify-content:center;gap:var(--space-2);padding:16px;border:1px solid #e9e9ed;border-radius:var(--radius-sm);font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:12px;letter-spacing:.12em;text-transform:uppercase">Free estimate</a>
+    </div>
+  </sc-if>
+  <div style="position:sticky;top:92px;z-index:90;background:rgba(156,154,154,.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(22,24,38,.25)">
+    <nav aria-label="Services" style="max-width:1280px;margin:0 auto;display:flex;overflow-x:auto;scrollbar-width:none;padding:10px clamp(16px,4vw,48px)">
+      <div style="display:flex;gap:var(--space-2);margin:0 auto">
+        <sc-for list="{{ navLinks }}" as="l" hint-placeholder-count="4">
+          <a href="{{ l.href }}" aria-current="{{ l.cur }}" style="white-space:nowrap;padding:10px 18px;border-radius:999px;border:1px solid {{ l.bd }};background:{{ l.bg }};color:{{ l.fg }};font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-size:11px" style-hover="border-color:#0035cc">{{ l.title }}</a>
+        </sc-for>
+      </div>
+    </nav>
+  </div>
+
+  <main>
+    <section data-screen-label="Service hero" style="padding:clamp(40px,7vh,80px) clamp(16px,4vw,48px) clamp(48px,8vh,96px)">
+      <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:clamp(32px,5vw,72px);align-items:center">
+        <div style="display:flex;flex-direction:column;gap:var(--space-6)">
+          <nav aria-label="Breadcrumb" style="display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-2);font-size:13px;color:#23253a">
+            <a href="Barnes Landing.dc.html" style="text-decoration:underline;text-underline-offset:3px" style-hover="color:#0035cc">Home</a><i class="ph ph-caret-right" style="font-size:11px"></i>
+            <a href="Barnes Landing.dc.html#services" style="text-decoration:underline;text-underline-offset:3px" style-hover="color:#0035cc">Services</a><i class="ph ph-caret-right" style="font-size:11px"></i>
+            <span aria-current="page" style="color:#161826;font-weight:500">{{ title }}</span>
+          </nav>
+          <div style="display:flex;align-items:center;gap:var(--space-4);font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase">Services</div>
+          <h1 style="margin:0;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:800;font-size:clamp(44px,6.4vw,96px);line-height:.95;letter-spacing:-.02em;text-wrap:balance">{{ title }}</h1>
+          <p style="margin:0;max-width:56ch;font-size:clamp(17px,1.35vw,20px);line-height:1.55;color:#23253a;text-wrap:pretty">{{ lead }}</p>
+          <div style="display:flex;flex-wrap:wrap;gap:var(--space-3)">
+            <a href="{{ estimateHref }}" style="display:inline-flex;align-items:center;gap:var(--space-2);padding:16px 28px;border-radius:var(--radius-sm);background:#0035cc;color:#f5f5f7;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase" style-hover="background:#002aa8;color:#f5f5f7">Free estimate for {{ short }}<i class="ph ph-arrow-right"></i></a>
+            <a href="tel:+13142037003" style="display:inline-flex;align-items:center;gap:var(--space-2);padding:16px 28px;border-radius:var(--radius-sm);border:1px solid #161826;color:#161826;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase" style-hover="background:rgba(22,24,38,.08)"><i class="ph ph-phone"></i>(314) 203-7003</a>
+          </div>
+        </div>
+        <div style="position:relative;padding:clamp(8px,1vw,12px);border-radius:var(--radius-lg);background:#0035cc;box-shadow:0 30px 70px rgba(0,42,168,.28)">
+          <div style="position:relative;aspect-ratio:5/4;border-radius:var(--radius-md);overflow:hidden;background:#161826">
+            <img src="{{ heroImg }}" alt="{{ heroAlt }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:{{ heroPos }}">
+          </div>
+          <span style="position:absolute;left:50%;top:0;transform:translate(-50%,-50%);padding:5px 12px;border-radius:999px;background:#f5f5f7;color:#0035cc;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:10px;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap">Barnes · {{ title }}</span>
+        </div>
+      </div>
+    </section>
+
+    <section aria-label="At a glance" style="padding:0 clamp(16px,4vw,48px)">
+      <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));border-top:1px solid #161826;border-bottom:1px solid #161826">
+        <sc-for list="{{ facts }}" as="f" hint-placeholder-count="4">
+          <div style="display:flex;gap:var(--space-4);align-items:flex-start;padding:var(--space-6) var(--space-4)">
+            <i class="{{ f.icon }}" style="font-size:26px;color:#0035cc;flex:none"></i>
+            <div style="display:flex;flex-direction:column;gap:4px"><span style="font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#23253a">{{ f.k }}</span><span style="font-size:16px;line-height:1.4;font-weight:500">{{ f.v }}</span></div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <section data-screen-label="Process" style="padding:clamp(64px,12vh,140px) clamp(16px,4vw,48px)">
+      <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:clamp(32px,5vw,80px);align-items:start">
+        <div style="position:sticky;top:176px;display:flex;flex-direction:column;gap:var(--space-6)">
+          <div style="display:flex;align-items:center;gap:var(--space-4);font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase">How it works</div>
+          <h2 style="margin:0;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:800;font-size:clamp(32px,4vw,56px);line-height:1;letter-spacing:-.01em;text-wrap:balance">{{ processTitle }}</h2>
+          <p style="margin:0;max-width:44ch;font-size:17px;line-height:1.6;color:#23253a;text-wrap:pretty">Same crew from the first day to the last, and you get updates the whole way through.</p>
+        </div>
+        <ol style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column">
+          <sc-for list="{{ process }}" as="p" hint-placeholder-count="5">
+            <li style="display:grid;grid-template-columns:56px minmax(0,1fr);gap:var(--space-5);padding:var(--space-6) 0;border-top:1px solid rgba(22,24,38,.3)">
+              <span style="width:48px;height:48px;border-radius:999px;background:{{ p.dot }};color:#f5f5f7;display:flex;align-items:center;justify-content:center"><i class="{{ p.icon }}" style="font-size:22px"></i></span>
+              <div style="display:flex;flex-direction:column;gap:var(--space-2)">
+                <h3 style="margin:0;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:800;font-size:22px;line-height:1.15">{{ p.t }}</h3>
+                <p style="margin:0;font-size:16px;line-height:1.55;color:#23253a;text-wrap:pretty">{{ p.b }}</p>
+              </div>
+            </li>
+          </sc-for>
+        </ol>
+      </div>
+    </section>
+
+    <section data-screen-label="Included and signs" style="padding:clamp(64px,10vh,120px) clamp(16px,4vw,48px);background:#161826;color:#f5f5f7">
+      <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:clamp(40px,6vw,96px)">
+        <div style="display:flex;flex-direction:column;gap:var(--space-6)">
+          <div style="display:flex;align-items:center;gap:var(--space-4);font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#c9cbe0">What's included</div>
+          <h2 style="margin:0;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:800;font-size:clamp(28px,3.2vw,44px);line-height:1.05;text-wrap:balance">Every {{ short }} comes with</h2>
+          <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column">
+            <sc-for list="{{ inc }}" as="i" hint-placeholder-count="6">
+              <li style="display:grid;grid-template-columns:28px 1fr;gap:var(--space-3);padding:var(--space-4) 0;border-top:1px solid rgba(245,245,247,.14);font-size:17px;line-height:1.45"><i class="ph ph-check-circle" style="font-size:22px;color:#6f8fff"></i><span>{{ i }}</span></li>
+            </sc-for>
+          </ul>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:var(--space-6)">
+          <div style="display:flex;align-items:center;gap:var(--space-4);font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#c9cbe0">Signs you need it</div>
+          <h2 style="margin:0;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:800;font-size:clamp(28px,3.2vw,44px);line-height:1.05;text-wrap:balance">Seeing any of these?</h2>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:var(--space-3)">
+            <sc-for list="{{ signs }}" as="s" hint-placeholder-count="4">
+              <div style="display:flex;flex-direction:column;gap:var(--space-3);padding:var(--space-5);border:1px solid rgba(245,245,247,.18);border-radius:var(--radius-md);background:rgba(245,245,247,.04)">
+                <i class="{{ s.icon }}" style="font-size:26px;color:#6f8fff"></i>
+                <span style="font-size:16px;line-height:1.45">{{ s.t }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <a href="{{ estimateHref }}" style="align-self:flex-start;display:inline-flex;align-items:center;gap:var(--space-2);padding:16px 26px;border-radius:var(--radius-sm);border:1px solid #f5f5f7;color:#f5f5f7;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:12px;letter-spacing:.12em;text-transform:uppercase" style-hover="background:#f5f5f7;color:#161826">Book an inspection<i class="ph ph-arrow-right"></i></a>
+        </div>
+      </div>
+    </section>
+
+    <section data-screen-label="Photos" style="padding:clamp(64px,12vh,140px) clamp(16px,4vw,48px) clamp(48px,8vh,96px)">
+      <div style="max-width:1280px;margin:0 auto;display:flex;flex-direction:column;gap:var(--space-8)">
+        <div style="display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:var(--space-4)">
+          <div style="display:flex;flex-direction:column;gap:var(--space-5)">
+            <div style="display:flex;align-items:center;gap:var(--space-4);font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase">From the job site</div>
+            <h2 style="margin:0;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:800;font-size:clamp(32px,4vw,56px);line-height:1;letter-spacing:-.01em">Real jobs, real crew</h2>
+          </div>
+          <a href="Barnes Landing.dc.html#work" style="display:inline-flex;align-items:center;gap:var(--space-2);font-size:15px;font-weight:500;text-decoration:underline;text-underline-offset:4px" style-hover="color:#0035cc">See all recent work<i class="ph ph-arrow-right"></i></a>
+        </div>
+        <div style="column-count:{{ cols }};column-gap:12px">
+          <sc-for list="{{ photos }}" as="ph" hint-placeholder-count="6">
+            <button type="button" onClick="{{ ph.open }}" aria-label="{{ ph.cap }}" style="display:block;width:100%;margin:0 0 12px;padding:0;break-inside:avoid;border:1px solid #161826;border-radius:var(--radius-sm);overflow:hidden;background:#8e8c8c;cursor:zoom-in;aspect-ratio:{{ ph.ar }}">
+              <img src="{{ ph.src }}" alt="{{ ph.cap }}" loading="lazy" style="display:block;width:100%;height:100%;object-fit:cover;transition:transform 800ms cubic-bezier(.22,1,.36,1)" style-hover="transform:scale(1.05)">
+            </button>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <section data-screen-label="FAQ" style="padding:clamp(48px,8vh,96px) clamp(16px,4vw,48px)">
+      <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:clamp(32px,5vw,80px);align-items:start">
+        <div style="display:flex;flex-direction:column;gap:var(--space-6)">
+          <div style="display:flex;align-items:center;gap:var(--space-4);font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase">Questions</div>
+          <h2 style="margin:0;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:800;font-size:clamp(32px,4vw,56px);line-height:1;letter-spacing:-.01em;text-wrap:balance">What homeowners ask us</h2>
+          <p style="margin:0;font-size:17px;line-height:1.6;color:#23253a">Don't see yours? Call and ask.</p>
+        </div>
+        <div style="display:flex;flex-direction:column;border-top:1px solid #161826">
+          <sc-for list="{{ faqs }}" as="q" hint-placeholder-count="4">
+            <div style="border-bottom:1px solid #161826">
+              <button type="button" onClick="{{ q.toggle }}" aria-expanded="{{ q.exp }}" style="width:100%;display:flex;align-items:center;justify-content:space-between;gap:var(--space-4);padding:var(--space-5) 0;background:transparent;border:0;cursor:pointer;text-align:left;color:#161826;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:18px;line-height:1.3" style-hover="color:#0035cc">
+                <span>{{ q.q }}</span>
+                <span style="width:36px;height:36px;flex:none;border-radius:999px;border:1px solid #161826;display:flex;align-items:center;justify-content:center;transform:{{ q.rot }};transition:transform .35s cubic-bezier(.22,1,.36,1)"><i class="ph ph-plus" style="font-size:16px"></i></span>
+              </button>
+              <div style="display:grid;grid-template-rows:{{ q.rows }};transition:grid-template-rows .45s cubic-bezier(.22,1,.36,1)">
+                <div style="overflow:hidden;min-height:0"><p style="margin:0;padding:0 48px var(--space-5) 0;font-size:16px;line-height:1.6;color:#23253a;text-wrap:pretty">{{ q.a }}</p></div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <section data-screen-label="Other services" style="padding:clamp(48px,8vh,96px) clamp(16px,4vw,48px)">
+      <div style="max-width:1280px;margin:0 auto;display:flex;flex-direction:column;gap:var(--space-8)">
+        <div style="display:flex;align-items:center;gap:var(--space-4);font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase">Other services</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:clamp(12px,1.6vw,20px)">
+          <sc-for list="{{ others }}" as="o" hint-placeholder-count="3">
+            <a href="{{ o.href }}" style="display:flex;flex-direction:column;background:#b3b1b1;border:1px solid #161826;border-radius:var(--radius-md);overflow:hidden;transition:transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s" style-hover="transform:translateY(-4px);box-shadow:0 20px 40px rgba(22,24,38,.2)">
+              <div style="aspect-ratio:16/9;overflow:hidden;border-bottom:1px solid #161826;background:#8e8c8c"><img src="{{ o.img }}" alt="" loading="lazy" style="display:block;width:100%;height:100%;object-fit:cover"></div>
+              <div style="display:flex;flex-direction:column;gap:var(--space-2);padding:var(--space-5)">
+                <span style="display:flex;align-items:center;justify-content:space-between;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:800;font-size:22px">{{ o.title }}<i class="ph ph-arrow-up-right" style="font-size:18px;color:#0035cc"></i></span>
+                <span style="font-size:14px;line-height:1.45;color:#23253a">{{ o.tag }}</span>
+              </div>
+            </a>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <section data-screen-label="CTA" style="padding:clamp(24px,4vh,48px) clamp(16px,4vw,48px) clamp(64px,10vh,120px)">
+      <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:var(--space-8);align-items:center;padding:clamp(28px,5vw,64px);border-radius:var(--radius-lg);background:radial-gradient(120% 140% at 15% 0%, #0a45e0 0%, #0035cc 55%, #002aa8 100%);color:#f5f5f7;box-shadow:0 30px 70px rgba(0,42,168,.3)">
+        <div style="display:flex;flex-direction:column;gap:var(--space-4)">
+          <h2 style="margin:0;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:800;font-size:clamp(32px,4.4vw,60px);line-height:1;letter-spacing:-.01em;text-wrap:balance">Ready for {{ short }}?</h2>
+          <p style="margin:0;max-width:48ch;font-size:17px;line-height:1.55;color:#dfe4f7">Free estimate, no pressure. We'll call you back within one business day.</p>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:var(--space-3);justify-content:flex-end">
+          <a href="{{ estimateHref }}" style="display:inline-flex;align-items:center;gap:var(--space-2);padding:18px 30px;border-radius:var(--radius-sm);background:#f5f5f7;color:#0035cc;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase" style-hover="background:#ffffff;color:#002aa8">Request my estimate<i class="ph ph-arrow-right"></i></a>
+          <a href="tel:+13142037003" style="display:inline-flex;align-items:center;gap:var(--space-2);padding:18px 30px;border-radius:var(--radius-sm);border:1px solid #f5f5f7;color:#f5f5f7;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase" style-hover="background:rgba(245,245,247,.12);color:#f5f5f7"><i class="ph ph-phone"></i>(314) 203-7003</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer data-screen-label="Footer" style="position:relative;padding:clamp(300px,34vw,560px) clamp(16px,4vw,48px) clamp(16px,3vw,40px);background-color:#ffffff;overflow:hidden;background-repeat:no-repeat;color:#f5f5f7">
+    <img src="assets/footer-crew.png" alt="" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 12%;display:block;pointer-events:none">
+    <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg, rgba(22,24,38,0) 0%, rgba(22,24,38,0) 38%, rgba(22,24,38,.55) 60%, rgba(22,24,38,.78) 100%)"></div>
+    <div style="position:relative;max-width:1280px;margin:0 auto;display:flex;flex-direction:column;gap:clamp(20px,3vh,32px);padding:clamp(18px,2.2vw,28px) clamp(20px,3vw,40px);border-radius:var(--radius-lg);background:linear-gradient(135deg, rgba(255,255,255,.26) 0%, rgba(255,255,255,.12) 100%);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);border:1px solid rgba(255,255,255,.45);box-shadow:inset 0 1px 0 rgba(255,255,255,.6), 0 24px 60px rgba(0,0,0,.3);text-shadow:0 1px 3px rgba(0,0,0,.55)">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:clamp(20px,3vw,40px)">
+        <div style="display:flex;flex-direction:column;gap:var(--space-4);grid-column:span 1;min-width:0">
+          <img src="assets/barnes-logo-blue.png" alt="Barnes Roofing and Construction" style="width:104px;height:auto;border-radius:var(--radius-md)">
+          <p style="margin:0;max-width:34ch;font-size:14px;line-height:1.55;color:#e9e9ed">Family-owned roofing and construction for the St. Louis metro.</p>
+          <span style="align-self:flex-start;display:inline-flex;align-items:center;gap:var(--space-2);padding:5px 10px;border:1px solid rgba(245,245,247,.6);border-radius:999px;font-size:11px;letter-spacing:.08em"><i class="ph ph-shield-check"></i>Licensed &amp; insured · MO</span>
+        </div>
+        <nav aria-label="Site" style="display:flex;flex-direction:column;gap:var(--space-2)">
+          <div style="font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#d6d9ff">Explore</div>
+          <sc-for list="{{ footerLinks }}" as="l" hint-placeholder-count="5">
+            <a href="{{ l.href }}" style="font-size:14px;color:#f5f5f7" style-hover="text-decoration:underline">{{ l.label }}</a>
+          </sc-for>
+        </nav>
+        <div style="display:flex;flex-direction:column;gap:var(--space-2)">
+          <div style="font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#d6d9ff">Contact</div>
+          <a href="tel:+13142037003" style="font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:20px" style-hover="text-decoration:underline">(314) 203-7003</a>
+          <span style="font-size:14px;color:#e9e9ed">Mon–Sat · 7a–7p</span>
+          <address style="font-style:normal;font-size:14px;line-height:1.5;color:#e9e9ed">5377 State Hwy N Suite 552<br>Cottleville MO 63304</address>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:var(--space-4);align-items:flex-start">
+          <a href="{{ estimateHref }}" class="btn" style="white-space:nowrap;padding:16px 28px;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;background:#0035cc;border-color:#d6d9ff;color:#f5f5f7" style-hover="background:#002aa8;border-color:#002aa8">Get a free estimate<i class="ph ph-arrow-right"></i></a>
+        </div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--space-4);padding-top:var(--space-4);border-top:1px solid rgba(245,245,247,.3);font-size:12px;color:#e9e9ed">
+        <span>© 2026 Barnes Roofing &amp; Construction · Cottleville, Missouri</span>
+        <span>Family-owned, small on purpose</span>
+      </div>
+    </div>
+  </footer>
+
+  <sc-if value="{{ lbOpen }}" hint-placeholder-val="{{ false }}">
+    <div role="dialog" aria-modal="true" aria-label="Photo viewer" onClick="{{ lbClose }}" style="position:fixed;inset:0;z-index:200;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--space-4);padding:clamp(16px,4vw,56px);background:rgba(12,14,24,.94);color:#f5f5f7">
+      <div role="img" aria-label="{{ lbCap }}" style="width:min(100%,1200px);height:78vh;background-image:{{ lbBg }};background-size:contain;background-repeat:no-repeat;background-position:center"></div>
+      <div onClick="{{ stop }}" style="display:flex;align-items:center;gap:var(--space-4);max-width:900px;width:100%">
+        <span style="font-variant-numeric:tabular-nums;font-size:12px;color:#c9cbe0">{{ lbCount }}</span>
+        <span style="flex:1;font-size:15px">{{ lbCap }}</span>
+        <button type="button" onClick="{{ lbPrev }}" aria-label="Previous photo" style="width:44px;height:44px;border-radius:999px;border:1px solid rgba(245,245,247,.5);background:transparent;color:#f5f5f7;font-size:18px;cursor:pointer" style-hover="background:rgba(245,245,247,.12)"><i class="ph ph-arrow-left"></i></button>
+        <button type="button" onClick="{{ lbNext }}" aria-label="Next photo" style="width:44px;height:44px;border-radius:999px;border:1px solid rgba(245,245,247,.5);background:transparent;color:#f5f5f7;font-size:18px;cursor:pointer" style-hover="background:rgba(245,245,247,.12)"><i class="ph ph-arrow-right"></i></button>
+      </div>
+      <button type="button" onClick="{{ lbClose }}" aria-label="Close" style="position:absolute;top:16px;right:16px;width:44px;height:44px;border-radius:999px;border:1px solid rgba(245,245,247,.5);background:transparent;color:#f5f5f7;font-size:20px;cursor:pointer"><i class="ph ph-x"></i></button>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;service&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;replacement&quot;, &quot;repair&quot;, &quot;gutters&quot;, &quot;siding&quot;], &quot;default&quot;: &quot;replacement&quot;, &quot;tsType&quot;: &quot;'replacement'|'repair'|'gutters'|'siding'&quot;}}">
+const W = 'assets/work/';
+const SERVICES = {
+  replacement: {
+    file: 'Roof Replacement.dc.html', title: 'Roof replacement', short: 'a new roof', tag: 'Tear-off to final shingle',
+    lead: "Full tear-off down to the deck, so we can see, and fix, what's underneath. You pick the shingle line and color before a single bundle goes up, and most homes are done in one to two days.",
+    hero: [W + 'step-finished.png', 'Drone view of a finished roof replacement', 'center 50%'],
+    facts: [['ph ph-clock', 'Time on site', 'Usually 1–2 days'], ['ph ph-user-check', 'Oversight', 'Final inspection on every job'], ['ph ph-broom', 'Cleanup', 'Tarps, magnet sweep, haul-away'], ['ph ph-map-pin', 'Area', 'St. Louis metro, MO & IL']],
+    processTitle: 'From first call to final walk',
+    process: [['Free inspection', 'We get on the roof, check the attic and decking, and walk you through what we found, with photos.'], ['Pick your materials', 'Shingle line, color, vents and flashing, chosen together. A written quote with no surprises.'], ['Protect the property', 'Tarps over siding, beds and lawn before a single shingle comes off.'], ['Tear-off and install', 'Every layer down to the deck, bad boards replaced, then underlayment, flashing and shingles.'], ['Cleanup and final walk', 'Magnet sweep for nails, full haul-away and an owner inspection before we call it done.']],
+    inc: ['Tear-off of every old layer', 'Deck inspection and rotted-board replacement', 'Ice & water shield plus synthetic underlayment', 'New drip edge, flashing and pipe boots', 'Ridge ventilation', 'Magnet sweep and full cleanup'],
+    signs: [['ph ph-stack', 'Shingles curling, cracking or losing granules'], ['ph ph-drop', 'Leaks in more than one spot'], ['ph ph-calendar', 'Roof is 20+ years old'], ['ph ph-sun', 'Daylight or damp decking in the attic']],
+    photos: [['step-tearoff.png', 'Crew tearing off the old roof'], ['g-t4.jpg', 'Stripped to the deck boards'], ['step-install.png', 'Underlayment going down'], ['g-i1.jpg', 'New courses over synthetic underlayment'], ['g-a5.png', 'Finished ridge and chimney from the drone'], ['g-f1.jpg', 'Clean lines up to the chimney'], ['g-t8.jpg', 'Tear-off with pitchforks', 'p'], ['g-a1.png', 'Aerial of a finished ridge line']],
+    faqs: [['How long does a replacement take?', 'Most homes are done in one to two days on site. Bigger or steeper roofs, or a lot of rotted decking, can add time, you get dates before we start.'], ['Do you tear off or roof over?', 'We tear off to the deck. It is the only way to find soft boards and install underlayment and flashing properly.'], ['Will you protect my yard and landscaping?', 'Yes. Tarps go over siding, beds and lawn first, and we finish with a magnet sweep for nails.'], ['Who will be on my roof?', 'The Barnes crew. We do not hand the job to a sub.']]
+  },
+  repair: {
+    file: 'Roof Repair.dc.html', title: 'Roof repair', short: 'a repair', tag: 'Leaks, flashing, storm patches',
+    lead: "We trace the leak to its source, fix what's actually broken, and tell you honestly what can wait. No upsell to a full roof you don't need.",
+    hero: [W + 'g-flashing.jpg', 'Re-flashing a brick chimney by hand', 'center 40%'],
+    facts: [['ph ph-clock', 'Time on site', 'Most repairs in one visit'], ['ph ph-camera', 'Proof', 'Photos of the problem and the fix'], ['ph ph-user-check', 'Oversight', 'Final inspection'], ['ph ph-map-pin', 'Area', 'St. Louis metro, MO & IL']],
+    processTitle: 'Find it, fix it, show you',
+    process: [['Trace the leak', 'We look inside and out, stains, attic, flashing, vents, until we find where the water actually gets in.'], ['Honest recommendation', "Repair what's broken. If the roof really needs replacing, we tell you, and tell you what can wait."], ['Fix it right', 'Matched shingles, new flashing or pipe boots, sealed and nailed to spec.'], ['Show the work', 'Before-and-after photos so you know exactly what was done.']],
+    inc: ['Leak tracing, inside and out', 'Matched shingle replacement', 'Chimney, wall and vent flashing', 'Pipe boot and vent replacement', 'Photos of the problem and the fix'],
+    signs: [['ph ph-drop-half-bottom', 'Water stains on a ceiling'], ['ph ph-wind', 'Shingles missing after wind or hail'], ['ph ph-house-line', 'Drips around the chimney or a vent'], ['ph ph-warning', 'Loose or lifted flashing']],
+    photos: [['g-repair.jpg', 'Storm-damage patch, marked and re-nailed'], ['tony-repair.jpg', 'Repair in progress', 'p'], ['g-i4.jpg', 'Checking the work', 'p'], ['g-f2.jpg', 'Finished slope'], ['g-i2.jpg', 'Shingles meet underlayment']],
+    faqs: [['Can you fix it without replacing the whole roof?', "Usually, yes. If a repair will hold, that's what we recommend."], ['How fast can you come out?', 'Call and we will get you on the schedule. Active leaks get priority.'], ['Can you match my existing shingles?', 'We match as closely as current product lines allow and will show you the options first.']]
+  },
+  gutters: {
+    file: 'Gutters.dc.html', title: 'Gutters', short: 'gutters', tag: 'Seamless, sized to your roof',
+    lead: "Seamless gutters and downspouts sized to your roof's actual runoff, hung straight, pitched right, and routed so water ends up away from your foundation.",
+    hero: [W + 'g-a2.png', 'Finished roof edge and gable from above', 'center 60%'],
+    facts: [['ph ph-clock', 'Time on site', 'Typically 1 day'], ['ph ph-ruler', 'Sizing', 'Matched to your roof runoff'], ['ph ph-user-check', 'Oversight', 'Final inspection'], ['ph ph-map-pin', 'Area', 'St. Louis metro, MO & IL']],
+    processTitle: 'Water off the roof, away from the house',
+    process: [['Measure the roof', 'We look at roof area, pitch and where water collects to size gutters and downspouts correctly.'], ['Remove the old', 'Old gutters come down and fascia gets checked for rot.'], ['Form and hang', 'Seamless runs formed on site, hung on hidden hangers with the right pitch.'], ['Route the water', 'Downspouts placed and extended so water ends up away from the foundation.']],
+    inc: ['Seamless aluminum gutters, formed on site', 'Downspouts routed away from the house', 'Hidden hangers for a clean line', 'Optional gutter guards', 'Old gutter removal and haul-away'],
+    signs: [['ph ph-cloud-rain', 'Overflow during heavy rain'], ['ph ph-arrow-bend-down-right', 'Sagging or pulling-away sections'], ['ph ph-waves', 'Water pooling by the foundation'], ['ph ph-paint-brush', 'Peeling paint or rot on the fascia']],
+    photos: [['g-a6.png', 'Roof edges from the drone'], ['g-a3.png', 'Overhead roof and eaves'], ['g-a4.png', 'Drone view of the whole house'], ['g-a7.png', 'Overhead: the whole job site']],
+    faqs: [['Should I replace gutters with my roof?', "Often it's the right time, drip edge and gutters work together. We'll tell you if yours still have life."], ['Do you install gutter guards?', 'Yes, as an option. We will talk through whether they make sense for the trees around your house.'], ['What size gutters do I need?', 'It depends on roof area and pitch. We size them to your roof rather than using one size for everything.']]
+  },
+  siding: {
+    file: 'Siding.dc.html', title: 'Siding', short: 'siding', tag: 'Vinyl and fiber cement',
+    lead: "Vinyl and fiber-cement siding that squares up your home's whole face, often paired with a new roof for one clean project and one crew.",
+    hero: [W + 'ba-after.png', 'Front of a finished home', 'center 50%'],
+    facts: [['ph ph-calendar-check', 'Schedule', 'Dates given up front'], ['ph ph-palette', 'Color', 'Matched to your roof'], ['ph ph-user-check', 'Oversight', 'Final inspection'], ['ph ph-map-pin', 'Area', 'St. Louis metro, MO & IL']],
+    processTitle: 'One face, one crew, one schedule',
+    process: [['Walk the house', 'We check the existing siding, trim and sheathing, and talk through vinyl vs. fiber cement.'], ['Pick profile and color', 'Samples next to your roof and brick so the whole house works together.'], ['Wrap and install', 'House wrap and moisture barrier first, then siding, trim, soffit and fascia.'], ['Final walk', 'Cleanup and an owner inspection of every wall before we call it done.']],
+    inc: ['Vinyl and fiber-cement options', 'House wrap and moisture barrier', 'Trim, soffit and fascia', 'Color matching to your roof', 'One schedule if paired with a roof'],
+    signs: [['ph ph-wave-sine', 'Warped, cracked or loose panels'], ['ph ph-sun-dim', "Fading that paint won't fix"], ['ph ph-tree', 'Soft spots or rot at the trim'], ['ph ph-thermometer', 'Rising energy bills and drafts']],
+    photos: [['g-after-p1.jpg', 'Front of a finished brick home', 'p'], ['after.jpg', 'Street view after the project'], ['g-after-p2.jpg', 'Finished home, new roof', 'p'], ['step-finished.png', 'Drone view of the front']],
+    faqs: [['Vinyl or fiber cement?', 'Vinyl is lower cost and low maintenance; fiber cement is heavier and more durable. We will show you both on your house.'], ['Can you do siding and roof together?', 'Yes, one crew and one schedule, with colors chosen together.'], ['Do you replace rotted trim?', 'Yes. Soft trim and sheathing get replaced before new siding goes on.']]
+  }
+};
+const ORDER = ['replacement', 'repair', 'gutters', 'siding'];
+
+class Component extends DCLogic {
+  state = { faq: 0, lb: -1, menu: false, w: typeof window !== 'undefined' ? window.innerWidth : 1280 };
+  componentDidMount() {
+    this.onResize = () => this.setState({ w: window.innerWidth });
+    this.onKey = e => {
+      if (this.state.lb < 0) return;
+      const n = this.photoList.length;
+      if (e.key === 'Escape') this.setState({ lb: -1 });
+      if (e.key === 'ArrowRight') this.setState(s => ({ lb: (s.lb + 1) % n }));
+      if (e.key === 'ArrowLeft') this.setState(s => ({ lb: (s.lb - 1 + n) % n }));
+    };
+    window.addEventListener('resize', this.onResize);
+    window.addEventListener('keydown', this.onKey);
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.onResize);
+    window.removeEventListener('keydown', this.onKey);
+  }
+  ddLinks(arr) {
+    return arr.map((l, i) => ({ ...l, caret: i === 0 ? 'ph ph-caret-down' : '',
+      enter: i === 0 ? () => { clearTimeout(this.ddT); this.setState({ dd: true }); } : undefined,
+      leave: i === 0 ? () => { clearTimeout(this.ddT); this.ddT = setTimeout(() => this.setState({ dd: false }), 160); } : undefined }));
+  }
+  renderVals() {
+    const key = SERVICES[this.props.service] ? this.props.service : 'replacement';
+    const s = SERVICES[key], idx = ORDER.indexOf(key), { faq, lb, w } = this.state;
+    const photos = s.photos.map(([f, cap, o], i) => ({ src: W + f, cap, ar: o === 'p' ? '3/4' : (i % 3 === 1 ? '1/1' : '4/3'), open: () => this.setState({ lb: i }) }));
+    this.photoList = photos;
+    const cur = lb >= 0 ? photos[lb] : null;
+    const n = photos.length;
+    return {
+      wide: w >= 1280, narrow: w < 1280, menuOpen: w < 1280 && this.state.menu,
+      menuIcon: this.state.menu ? 'ph ph-x' : 'ph ph-list', toggleMenu: () => this.setState(st => ({ menu: !st.menu })),
+      mainLinks: this.ddLinks([['Services', 'Barnes Landing.dc.html#services'], ['Recent work', 'Barnes Landing.dc.html#work'], ['Service area', 'Barnes Landing.dc.html#area']].map(([label, href]) => ({ label, href }))),
+      ddOpen: !!this.state.dd && w >= 1280,
+      ddEnter: () => { clearTimeout(this.ddT); this.setState({ dd: true }); },
+      ddLeave: () => { clearTimeout(this.ddT); this.ddT = setTimeout(() => this.setState({ dd: false }), 160); },
+      ddAll: 'Barnes Landing.dc.html#services',
+      ddItems: [['Roof replacement', 'Tear-off to final shingle', 'Roof Replacement.dc.html', 'assets/work/step-finished.png'], ['Roof repair', 'Leaks, flashing, storm patches', 'Roof Repair.dc.html', 'assets/work/g-flashing.jpg'], ['Gutters', 'Seamless, sized to your roof', 'Gutters.dc.html', 'assets/work/g-a2.png'], ['Siding', 'Vinyl and fiber cement', 'Siding.dc.html', 'assets/work/ba-after.png']].map(([title, tag, href, img]) => ({ title, tag, href, img, bg: `url("${img}")` })),
+      menuLinks: [['Home', 'Barnes Landing.dc.html'], ...ORDER.map(k => [SERVICES[k].title, SERVICES[k].file]), ['Recent work', 'Barnes Landing.dc.html#work'], ['Service area', 'Barnes Landing.dc.html#area'], ['Our story', 'Our Story.dc.html']].map(([label, href]) => ({ label, href })),
+      footerLinks: [['Home', 'Barnes Landing.dc.html'], ...ORDER.map(k => [SERVICES[k].title, SERVICES[k].file]), ['Recent work', 'Barnes Landing.dc.html#work'], ['Our story', 'Our Story.dc.html'], ['Service area', 'Barnes Landing.dc.html#area']].map(([label, href]) => ({ label, href })),
+      title: s.title, short: s.short, lead: s.lead, num: '0' + (idx + 1), processTitle: s.processTitle,
+      heroImg: s.hero[0], heroAlt: s.hero[1], heroPos: s.hero[2],
+      estimateHref: 'Barnes Landing.dc.html?service=' + key + '#estimate',
+      navLinks: ORDER.map(k => ({ title: SERVICES[k].title, href: SERVICES[k].file, cur: k === key ? 'page' : 'false', fg: k === key ? '#f5f5f7' : '#161826', bg: k === key ? '#161826' : 'rgba(245,245,247,.5)', bd: k === key ? '#161826' : 'rgba(22,24,38,.35)' })),
+      facts: s.facts.map(([icon, k, v]) => ({ icon, k, v })),
+      process: s.process.map(([t, b], i) => ({ t, b, n: '0' + (i + 1), dot: i === 0 ? '#0035cc' : '#161826', icon: ['ph ph-magnifying-glass', 'ph ph-clipboard-text', 'ph ph-umbrella', 'ph ph-hammer', 'ph ph-check-circle'][i] || 'ph ph-check' })),
+      inc: s.inc,
+      signs: s.signs.map(([icon, t]) => ({ icon, t })),
+      photos, cols: w >= 1000 ? 3 : w >= 600 ? 2 : 1,
+      faqs: s.faqs.map(([q, a], i) => ({ q, a, exp: faq === i ? 'true' : 'false', rows: faq === i ? '1fr' : '0fr', rot: faq === i ? 'rotate(45deg)' : 'rotate(0deg)', toggle: () => this.setState({ faq: faq === i ? -1 : i }) })),
+      others: ORDER.filter(k => k !== key).map(k => ({ title: SERVICES[k].title, tag: SERVICES[k].tag, href: SERVICES[k].file, img: SERVICES[k].hero[0], num: '0' + (ORDER.indexOf(k) + 1) + ' / 04' })),
+      lbOpen: !!cur, lbBg: cur ? `url("${cur.src}")` : 'none', lbCap: cur ? cur.cap : '', lbCount: cur ? `${lb + 1} / ${n}` : '',
+      lbClose: () => this.setState({ lb: -1 }),
+      lbPrev: e => { e.stopPropagation(); this.setState({ lb: (lb - 1 + n) % n }); },
+      lbNext: e => { e.stopPropagation(); this.setState({ lb: (lb + 1) % n }); },
+      stop: e => e.stopPropagation()
+    };
+  }
+}
+</script>
+</body>
+</html>

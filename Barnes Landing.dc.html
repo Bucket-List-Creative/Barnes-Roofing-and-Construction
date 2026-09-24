@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/nocturne-f7d57233-40ac-4782-8baf-b63aefc19781/styles.css">
+<script src="_ds/nocturne-f7d57233-40ac-4782-8baf-b63aefc19781/_ds_bundle.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,600;125,700;125,800&amp;display=swap">
+<style>
+:root{--space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:20px;--space-6:24px;--space-8:32px}
+body{margin:0;background:#9c9a9a;color:var(--color-text);font-family:var(--font-body)}
+a{color:inherit;text-decoration:none}
+a:hover{color:inherit}
+@keyframes bwIn{from{transform:translateY(55%);opacity:0;filter:blur(8px)}to{transform:none;opacity:1;filter:blur(0)}}
+@keyframes bwDrop{0%{transform:translateY(-140%) scale(.5) rotate(-12deg);opacity:0}60%{transform:translateY(10%) scale(1.06);opacity:1}100%{transform:none;opacity:1}}
+@keyframes bwBar{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@media (prefers-reduced-motion:reduce){[data-bw]{animation:none!important}}
+</style>
+</helmet>
+<div style="position:relative;min-height:100vh;background:#9c9a9a;color:#161826">
+
+  <header data-screen-label="Header" style="position:fixed;top:0;left:0;right:0;z-index:100;overflow:hidden;background:radial-gradient(90% 70% at 50% 45%, #0a45e0 0%, #0035cc 55%, #002aa8 100%);background-color:#0035cc;box-shadow:0 8px 24px rgba(0,0,0,.35);transition:height 1300ms cubic-bezier(.65,0,.25,1);height:{{ panelHeight }}">
+    <div style="position:absolute;left:50%;top:50%;display:flex;flex-direction:column;align-items:center;gap:24px;transform-origin:center;transition:transform 1300ms cubic-bezier(.65,0,.25,1);transform:{{ groupTransform }}">
+      <a href="#top" onClick="{{ goTop }}" aria-label="Barnes Roofing and Construction, top" style="position:relative;display:block;width:130px;height:168px;transition:transform 700ms cubic-bezier(.22,1,.36,1);transform:{{ markShift }}">
+        <img src="assets/mark-top.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;transition:transform 900ms cubic-bezier(.55,0,.25,1.25);transform:{{ topTransform }}">
+        <img src="assets/mark-bottom.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;transition:transform 900ms cubic-bezier(.55,0,.25,1.25);transform:{{ bottomTransform }}">
+      </a>
+      <div style="width:300px;overflow:hidden">
+        <img src="assets/barnes-wordmark.png" alt="Barnes Roofing and Construction" style="display:block;width:100%;height:auto;transition:transform 800ms cubic-bezier(.22,1,.36,1), opacity 600ms ease;transform:{{ titleTransform }};opacity:{{ titleOpacity }}">
+      </div>
+    </div>
+    <div style="position:absolute;left:0;right:0;top:0;display:flex;align-items:center;padding:0 clamp(16px,4vw,48px);transition:height 300ms ease;height:{{ barHeight }};pointer-events:{{ navPointer }}">
+      <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
+        <nav style="flex:1;min-width:0;display:flex;align-items:center;gap:var(--space-2)">
+          <sc-for list="{{ leftLinks }}" as="l" hint-placeholder-count="3">
+            <a href="{{ l.href }}" onClick="{{ l.onClick }}" style="position:relative;white-space:nowrap;padding:var(--space-3);font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:12px;letter-spacing:.12em;text-transform:uppercase;border-radius:var(--radius-sm);transition:opacity 600ms ease, transform 700ms cubic-bezier(.22,1,.36,1);opacity:{{ l.opacity }};transform:{{ l.transform }};transition-delay:{{ l.delay }};color:{{ l.color }}" style-hover="background:rgba(255,255,255,.1);color:#e9e9ed" onMouseEnter="{{ l.enter }}" onMouseLeave="{{ l.leave }}">{{ l.label }}<i class="{{ l.caret }}" style="margin-left:4px;font-size:11px"></i><span style="position:absolute;left:var(--space-3);right:var(--space-3);bottom:0;height:1px;background:#e9e9ed;transform-origin:left;transition:transform 250ms ease;transform:{{ l.underline }}"></span></a>
+          </sc-for>
+        </nav>
+        <div style="flex:none;width:170px"></div>
+        <div style="flex:1;min-width:0;display:flex;align-items:center;justify-content:flex-end;gap:var(--space-4)">
+          <a href="Our Story.dc.html" style="white-space:nowrap;padding:10px 12px;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#c9cbe0;border-radius:var(--radius-sm);transition:opacity 600ms ease;opacity:{{ ctaOpacity }}" style-hover="background:rgba(255,255,255,.1);color:#e9e9ed">Our story</a>
+          <a href="tel:+13142037003" style="display:flex;flex-direction:column;align-items:flex-end;gap:2px;white-space:nowrap;color:#e9e9ed;transition:opacity 600ms ease, transform 700ms cubic-bezier(.22,1,.36,1);opacity:{{ ctaOpacity }};transform:{{ ctaTransform }};transition-delay:{{ phoneDelay }}" style-hover="color:#ffffff">
+                        <span style="display:flex;align-items:center;gap:var(--space-2);font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:14px;letter-spacing:.04em;font-variant-numeric:tabular-nums"><i class="ph ph-phone" style="font-size:15px"></i>(314) 203-7003</span>
+          </a>
+          <a href="#estimate" onClick="{{ goEstimate }}" class="btn btn-primary" style="flex:none;white-space:nowrap;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:12px;letter-spacing:.16em;text-transform:uppercase;border-color:#e9e9ed;color:#e9e9ed;transition:opacity 600ms ease, transform 700ms cubic-bezier(.22,1,.36,1), background 150ms ease;opacity:{{ ctaOpacity }};transform:{{ ctaTransform }};transition-delay:{{ ctaDelay }}" style-hover="background:rgba(255,255,255,.12)">Free estimate<i class="ph ph-arrow-right"></i></a>
+        </div>
+      </sc-if>
+      <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
+        <a href="tel:+13142037003" class="btn btn-icon btn-ghost" aria-label="Call us" style="color:#e9e9ed;transition:opacity 600ms ease;opacity:{{ ctaOpacity }}"><i class="ph ph-phone" style="font-size:20px"></i></a>
+        <div style="flex:1"></div>
+        <button class="btn btn-icon btn-ghost" aria-label="Menu" onClick="{{ toggleMenu }}" style="color:#e9e9ed;transition:opacity 600ms ease;opacity:{{ ctaOpacity }}"><i class="{{ menuIcon }}" style="font-size:20px"></i></button>
+      </sc-if>
+    </div>
+  </header>
+  <sc-if value="{{ ddOpen }}" hint-placeholder-val="{{ false }}">
+    <div onMouseEnter="{{ ddEnter }}" onMouseLeave="{{ ddLeave }}" style="position:fixed;left:clamp(16px,4vw,48px);top:{{ barHeight }};z-index:120;width:min(560px,calc(100vw - 32px));padding-top:10px">
+      <div role="menu" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-2);padding:var(--space-3);background:#161826;color:#f5f5f7;border:1px solid rgba(245,245,247,.14);border-radius:var(--radius-md);box-shadow:0 24px 60px rgba(0,0,0,.4)">
+        <sc-for list="{{ ddItems }}" as="d" hint-placeholder-count="0">
+          <a href="{{ d.href }}" role="menuitem" style="display:grid;grid-template-columns:64px minmax(0,1fr);gap:var(--space-3);align-items:center;padding:var(--space-2);border-radius:var(--radius-sm)" style-hover="background:rgba(245,245,247,.08)">
+            <span style="width:64px;height:48px;border-radius:6px;overflow:hidden;background:#23253a"><span style="display:block;width:100%;height:100%;background-image:{{ d.bg }};background-size:cover;background-position:center"></span></span>
+            <span style="display:flex;flex-direction:column;gap:2px;min-width:0"><span style="font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-size:12px;color:#f5f5f7">{{ d.title }}</span><span style="font-size:12px;color:#9fa1b0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ d.tag }}</span></span>
+          </a>
+        </sc-for>
+        <a href="{{ ddAll }}" style="grid-column:1 / -1;display:flex;align-items:center;justify-content:space-between;padding:var(--space-3);margin-top:var(--space-1);border-top:1px solid rgba(245,245,247,.12);font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-size:11px;color:#c9cbe0" style-hover="color:#f5f5f7">Compare all services<i class="ph ph-arrow-right"></i></a>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ menuVisible }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;left:0;right:0;z-index:99;max-height:calc(100vh - {{ barHeight }});overflow-y:auto;overscroll-behavior:contain;box-sizing:border-box;display:flex;flex-direction:column;gap:var(--space-2);padding:var(--space-6) clamp(16px,4vw,48px) var(--space-8);background:#161826;color:#e9e9ed;box-shadow:var(--shadow-md);top:{{ barHeight }}">
+      <sc-for list="{{ leftLinks }}" as="l" hint-placeholder-count="3">
+        <a href="{{ l.href }}" onClick="{{ l.onClick }}" style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-4) 0;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:15px;letter-spacing:.16em;text-transform:uppercase;border-bottom:1px solid #34364a">{{ l.label }}<i class="ph ph-caret-right" style="color:#9fa1b0"></i></a>
+      </sc-for>
+      <sc-for list="{{ menuPages }}" as="mp" hint-placeholder-count="5">
+        <a href="{{ mp.href }}" style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-4) 0;border-bottom:1px solid rgba(245,245,247,.12);font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:14px;letter-spacing:.12em;text-transform:uppercase">{{ mp.label }}<i class="ph ph-arrow-up-right"></i></a>
+      </sc-for>
+      <a href="tel:+13142037003" style="display:flex;flex-direction:column;gap:2px;padding:var(--space-4) 0"><span style="font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:18px">(314) 203-7003</span></a>
+      <a href="#estimate" onClick="{{ goEstimate }}" class="btn btn-primary btn-block" style="border-color:#e9e9ed;color:#e9e9ed">Free estimate</a>
+    </div>
+  </sc-if>
+
+  
+  <main>
+    <section id="top" data-screen-label="Hero" style="position:relative;min-height:100vh;display:flex;align-items:center;padding:calc(128px + 7vh) clamp(16px,4vw,48px) 10vh;background:radial-gradient(90% 70% at 15% 30%, #adabab 0%, #9c9a9a 70%)">
+      
+    <div style="width:100%;max-width:1280px;margin:0 auto;display:flex;flex-direction:column;align-items:center;text-align:center;gap:var(--space-8);transition:opacity 900ms ease 200ms, transform 1000ms cubic-bezier(.22,1,.36,1) 200ms;opacity:{{ heroOpacity }};transform:{{ heroTransform }}">
+        
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+          
+  <img src="assets/roof-chevron.png" alt="" aria-hidden="true" style="display: block; width: 85px; max-width: none; aspect-ratio: 3.4/1; height: 65px; object-fit: fill; margin: 0 auto -4px"><div style="display:flex;align-items:center;justify-content:center;gap:var(--space-4);font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#161826">No job too big or small, we do them all</div>
+        </div><h1 style="margin:0 auto;max-width:none;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:800;font-size:clamp(52px,9vw,148px);line-height:.94;letter-spacing:-.02em;color:#161826;text-wrap:balance">A roof built {{ swapWord }}</h1>
+        <p style="margin:0 auto;max-width:60ch;font-size:clamp(16px,1.3vw,19px);line-height:1.6;color:#23253a;text-wrap:pretty">Roof replacement, repairs, gutters and siding across the St. Louis metro. One local crew from the first inspection to the final walk-through, and a straight answer every time you call.</p>
+        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:var(--space-4)">
+          <a href="#estimate" onClick="{{ goEstimate }}" class="btn" style="padding:16px 28px;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;background:#0035cc;border-color:#0035cc;color:#e9e9ed" style-hover="background:#002aa8;border-color:#002aa8" style-active="background:#00208a">Get a free estimate<i class="ph ph-arrow-right"></i></a>
+          <a href="tel:+13142037003" class="btn" style="padding:16px 28px;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;border-color:#161826;color:#161826" style-hover="background:rgba(22,24,38,.08)" style-active="background:rgba(22,24,38,.16)"><i class="ph ph-phone"></i>Call (314) 203-7003</a>
+        </div>
+      </div></section>
+
+    
+    <section id="services" data-screen-label="Services" style="position:relative;padding:14vh clamp(16px,4vw,48px) 10vh">
+      <div style="max-width:1280px;margin:0 auto;display:flex;flex-direction:column;gap:clamp(32px,5vw,64px)">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:var(--space-6) clamp(28px,5vw,72px);align-items:end">
+          <div style="display:flex;flex-direction:column;gap:var(--space-6)">
+            <div style="display:inline-grid;align-self:flex-start;justify-self:start"><img src="assets/roof-chevron.png" alt="" aria-hidden="true" style="display: block; width: 50px; min-width: 100%; aspect-ratio: 3.4/1; height: 40px; object-fit: fill; margin: 0 0 -3px"><div style="display:flex;align-items:center;gap:var(--space-4);font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-size:12px;letter-spacing:.2em">Services</div></div>
+            <h2 style="margin:0;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:800;font-size:clamp(32px,4vw,56px);line-height:1;letter-spacing:-.01em;text-wrap:balance">Four trades. One crew. Done right.</h2>
+          </div>
+          <p style="margin:0;max-width:52ch;font-size:clamp(16px,1.25vw,18px);line-height:1.6;color:#23253a;text-wrap:pretty">Here's what each service includes, the signs you might need it, and roughly how long it takes. Pick one and we'll pre-fill your estimate request.</p>
+        </div>
+
+        <sc-if value="{{ svcNarrow }}" hint-placeholder-val="{{ false }}">
+          <nav aria-label="Services" style="position:sticky;top:92px;z-index:20;margin:0 calc(-1 * clamp(16px,4vw,48px));padding:10px clamp(16px,4vw,48px);display:flex;gap:6px;overflow-x:auto;background:rgba(156,154,154,.86);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(22,24,38,.2)">
+            <sc-for list="{{ svcNav }}" as="n" hint-placeholder-count="4">
+              <a href="{{ n.href }}" onClick="{{ n.go }}" style="flex:none;padding:10px 18px;border-radius:999px;border:1px solid {{ n.bd }};background:{{ n.bg }};color:{{ n.fg }};font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase">{{ n.title }}</a>
+            </sc-for>
+          </nav>
+        </sc-if>
+
+        <div style="display:grid;grid-template-columns:{{ svcCols }};gap:clamp(28px,4vw,64px);align-items:start">
+          <sc-if value="{{ svcWide }}" hint-placeholder-val="{{ true }}">
+            <nav aria-label="Services" style="position:sticky;top:124px;display:flex;flex-direction:column;background:#161826;color:#f5f5f7;border-radius:var(--radius-md);overflow:hidden;box-shadow:0 24px 50px rgba(22,24,38,.28)">
+              <div style="height:3px;background:rgba(245,245,247,.12)"><div style="height:100%;width:{{ svcProg }};background:#0a45e0;transition:width .5s cubic-bezier(.22,1,.36,1)"></div></div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-5) var(--space-5) var(--space-3)">
+                <span style="font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#9fa1b0">What we do</span>
+                
+              </div>
+              <ol style="margin:0;padding:0 var(--space-3) var(--space-3);list-style:none;display:flex;flex-direction:column">
+                <sc-for list="{{ svcNav }}" as="n" hint-placeholder-count="4">
+                  <li style="position:relative">
+                    <a href="{{ n.href }}" onClick="{{ n.go }}" aria-current="{{ n.cur }}" style="display:grid;grid-template-columns:30px minmax(0,1fr);gap:0 var(--space-3);padding:var(--space-3) var(--space-2);border-radius:var(--radius-sm);background:{{ n.rowBg }};transition:background .3s" style-hover="background:rgba(245,245,247,.06)">
+                      <span style="position:relative;display:flex;justify-content:center">
+                        <span style="position:relative;z-index:1;width:14px;height:14px;margin-top:6px;box-sizing:border-box;border-radius:999px;display:flex;align-items:center;justify-content:center;border:2px solid {{ n.dotBd }};background:{{ n.dotBg }};color:{{ n.dotFg }};font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:800;font-size:11px;font-variant-numeric:tabular-nums;transition:background .3s, border-color .3s, color .3s"></span>
+                      </span>
+                      <span style="display:flex;flex-direction:column;gap:2px;min-width:0;padding-top:3px">
+                        <span style="display:flex;align-items:center;justify-content:space-between;gap:var(--space-2)"><span style="font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:800;font-size:16px;line-height:1.2;color:{{ n.fgT }};transition:color .3s">{{ n.title }}</span><i class="ph ph-arrow-right" style="font-size:14px;color:#0a45e0;opacity:{{ n.arrow }};transition:opacity .3s"></i></span>
+                        <span style="font-size:13px;line-height:1.4;color:{{ n.fgS }};transition:color .3s">{{ n.tag }}</span>
+                        <span style="display:grid;grid-template-rows:{{ n.rows }};transition:grid-template-rows .5s cubic-bezier(.22,1,.36,1)">
+                          <span style="overflow:hidden;min-height:0"><span style="display:block;margin-top:var(--space-3);aspect-ratio:16/9;border-radius:6px;overflow:hidden;background:#23253a"><img src="{{ n.thumb }}" alt="" loading="lazy" style="display:block;width:100%;height:100%;object-fit:cover"></span></span>
+                        </span>
+                      </span>
+                    </a>
+                    <span aria-hidden="true" style="position:absolute;left:calc(var(--space-2) + 15px);top:34px;bottom:-14px;width:1px;background:rgba(245,245,247,.16);display:{{ n.line }}"></span>
+                  </li>
+                </sc-for>
+              </ol>
+              <div style="display:flex;flex-direction:column;gap:var(--space-3);padding:var(--space-5);border-top:1px solid rgba(245,245,247,.12);background:rgba(245,245,247,.03)">
+                <a href="#estimate" onClick="{{ goEstimate }}" style="display:flex;align-items:center;justify-content:space-between;gap:var(--space-2);padding:16px 20px;border-radius:var(--radius-sm);background:#0035cc;color:#f5f5f7;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-size:12px" style-hover="background:#0a45e0;color:#f5f5f7">Free estimate<i class="ph ph-arrow-right"></i></a>
+                <a href="tel:+13142037003" style="display:flex;align-items:center;gap:var(--space-3);color:#f5f5f7" style-hover="color:#c9cbe0">
+                  <span style="width:36px;height:36px;flex:none;border-radius:999px;border:1px solid rgba(245,245,247,.3);display:flex;align-items:center;justify-content:center"><i class="ph ph-phone" style="font-size:16px"></i></span>
+                  <span style="display:flex;flex-direction:column;gap:1px"><span style="font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-size:10px;color:#9fa1b0">Call us</span><span style="font-size:15px;font-weight:500;font-variant-numeric:tabular-nums">(314) 203-7003</span></span>
+                </a>
+              </div>
+            </nav>
+          </sc-if>
+
+          <div style="display:flex;flex-direction:column;gap:clamp(20px,3vw,40px);min-width:0">
+            <sc-for list="{{ services }}" as="s" hint-placeholder-count="4">
+              <article id="{{ s.id }}" style="scroll-margin-top:110px;display:flex;flex-direction:column;background:#b3b1b1;border:1px solid #161826;border-radius:var(--radius-md);overflow:hidden">
+                <div style="display:grid;grid-template-columns:minmax(0,3fr) minmax(0,1fr);grid-template-rows:minmax(0,1fr) minmax(0,1fr);gap:4px;aspect-ratio:16/8;background:#161826">
+                  <button type="button" onClick="{{ s.open0 }}" aria-label="View {{ s.title }} photo larger" style="grid-row:span 2;position:relative;min-height:0;padding:0;border:0;overflow:hidden;cursor:zoom-in;background:#8e8c8c">
+                    <img src="{{ s.img }}" alt="{{ s.alt }}" loading="lazy" style="position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;object-position:{{ s.pos }};transition:transform 900ms cubic-bezier(.22,1,.36,1)" style-hover="transform:scale(1.04)">
+                    <span style="position:absolute;left:14px;top:14px;padding:5px 10px;border-radius:999px;background:#0035cc;color:#f5f5f7;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-size:10px">{{ s.tag }}</span>
+                  </button>
+                  <sc-for list="{{ s.thumbs }}" as="t" hint-placeholder-count="2">
+                    <button type="button" onClick="{{ t.open }}" aria-label="View photo larger" style="position:relative;min-height:0;padding:0;border:0;overflow:hidden;cursor:zoom-in;background:#8e8c8c">
+                      <img src="{{ t.src }}" alt="{{ t.cap }}" loading="lazy" style="position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;transition:transform 900ms cubic-bezier(.22,1,.36,1)" style-hover="transform:scale(1.06)">
+                    </button>
+                  </sc-for>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:var(--space-6);padding:clamp(24px,3vw,44px)">
+                  <div style="display:flex;flex-direction:column;gap:var(--space-3)">
+                    <h3 style="margin:0;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:800;font-size:clamp(28px,3vw,40px);line-height:1;letter-spacing:-.01em;text-wrap:balance">{{ s.title }}</h3>
+                    <p style="margin:0;max-width:60ch;font-size:clamp(16px,1.2vw,18px);line-height:1.55;color:#23253a;text-wrap:pretty">{{ s.body }}</p>
+                  </div>
+                  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:var(--space-6) clamp(20px,3vw,40px)">
+                    <div style="display:flex;flex-direction:column;gap:var(--space-3)">
+                      <div style="font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#0035cc">What's included</div>
+                      <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:var(--space-2)">
+                        <sc-for list="{{ s.inc }}" as="i" hint-placeholder-count="5">
+                          <li style="display:grid;grid-template-columns:18px 1fr;gap:var(--space-2);font-size:15px;line-height:1.45;color:#161826"><i class="ph ph-check" style="color:#0035cc;font-size:16px;margin-top:2px"></i><span>{{ i }}</span></li>
+                        </sc-for>
+                      </ul>
+                    </div>
+                    <div style="display:flex;flex-direction:column;gap:var(--space-3)">
+                      <div style="font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#0035cc">Signs you need it</div>
+                      <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:var(--space-2)">
+                        <sc-for list="{{ s.signs }}" as="i" hint-placeholder-count="4">
+                          <li style="display:grid;grid-template-columns:18px 1fr;gap:var(--space-2);font-size:15px;line-height:1.45;color:#161826"><i class="ph ph-warning-circle" style="color:#34364a;font-size:16px;margin-top:2px"></i><span>{{ i }}</span></li>
+                        </sc-for>
+                      </ul>
+                    </div>
+                  </div>
+                  <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--space-4);padding-top:var(--space-5);border-top:1px solid rgba(22,24,38,.25)">
+                    <div style="display:flex;flex-wrap:wrap;gap:var(--space-2) var(--space-6)">
+                      <span style="display:inline-flex;align-items:center;gap:var(--space-2);font-size:14px;color:#23253a"><i class="ph ph-clock" style="font-size:16px;color:#0035cc"></i>{{ s.time }}</span>
+                      <span style="display:inline-flex;align-items:center;gap:var(--space-2);font-size:14px;color:#23253a"><i class="ph ph-user-check" style="font-size:16px;color:#0035cc"></i>Final inspection</span>
+                    </div>
+                    <div style="display:flex;flex-wrap:wrap;gap:var(--space-2)"><a href="{{ s.page }}" style="display:inline-flex;align-items:center;gap:var(--space-2);padding:14px 24px;border-radius:var(--radius-sm);background:#0035cc;color:#f5f5f7;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:12px;letter-spacing:.12em;text-transform:uppercase" style-hover="background:#002aa8;color:#f5f5f7">Full details<i class="ph ph-arrow-up-right"></i></a><a href="#estimate" onClick="{{ s.quote }}" style="display:inline-flex;align-items:center;gap:var(--space-2);padding:14px 24px;border-radius:var(--radius-sm);border:1px solid #161826;color:#161826;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-size:12px" style-hover="background:#161826;color:#f5f5f7">Estimate for {{ s.short }}<i class="ph ph-arrow-right"></i></a></div>
+                  </div>
+                </div>
+              </article>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="transform" data-screen-label="Before &amp; after" style="position:relative;height:320vh;background:#9c9a9a">
+      <div style="position:sticky;top:0;height:100vh;box-sizing:border-box;padding:104px clamp(12px,2.4vw,32px) clamp(12px,2.4vw,28px)">
+        <div style="position:relative;height:100%;box-sizing:border-box;padding:clamp(10px,1.2vw,16px);border-radius:var(--radius-lg);background-color:#0035cc;box-shadow:0 30px 70px rgba(0,42,168,.3)">
+          <span aria-hidden="true" style="position:absolute;left:50%;top:0;transform:translate(-50%,-50%);padding:5px 12px;border-radius:999px;background:#f5f5f7;color:#0035cc;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-size:10px;z-index:3;white-space:nowrap">Barnes · Before &amp; after</span>
+          <div id="ba-stage" style="position:relative;height:100%;border-radius:var(--radius-md);overflow:hidden;background:#161826;box-shadow:inset 0 0 0 1px rgba(245,245,247,.4)">
+            <img id="ba-before" src="assets/work/ba-before.png" alt="The house before: worn, faded shingles" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 60%;transform-origin:center;will-change:transform,filter">
+            <div id="ba-after" style="position:absolute;inset:0;-webkit-mask-image:url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20120%22%3E%3Cpath%20d%3D%22M50%202C50%202%2092%2050%2092%2078A42%2042%200%200%201%208%2078C8%2050%2050%202%2050%202Z%22%20fill%3D%22%23000%22%2F%3E%3C%2Fsvg%3E');mask-image:url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20120%22%3E%3Cpath%20d%3D%22M50%202C50%202%2092%2050%2092%2078A42%2042%200%200%201%208%2078C8%2050%2050%202%2050%202Z%22%20fill%3D%22%23000%22%2F%3E%3C%2Fsvg%3E');-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center 58%;mask-position:center 58%;-webkit-mask-size:0% auto;mask-size:0% auto;transition:opacity .35s ease;will-change:mask-size">
+              <sc-for list="{{ baAngles }}" as="an" hint-placeholder-count="0">
+                <div role="img" aria-label="{{ an.alt }}" style="position:absolute;inset:0;background-image:{{ an.bg }};background-size:cover;background-position:{{ an.pos }};opacity:{{ an.op }};transform:{{ an.tf }};transition:opacity 700ms ease, transform 1200ms cubic-bezier(.22,1,.36,1)"></div>
+              </sc-for>
+            </div>
+            <div id="ba-deck" aria-hidden="true" style="position:absolute;right:clamp(16px,5vw,80px);top:46%;width:clamp(150px,19vw,280px);aspect-ratio:4/3.4;transform:translateY(-50%);pointer-events:none;opacity:0">
+              <sc-for list="{{ baDuring }}" as="d" hint-placeholder-count="0">
+                <figure id="{{ d.id }}" style="position:absolute;inset:0;margin:0;padding:8px 8px 30px;box-sizing:border-box;background:#f5f5f7;border-radius:6px;box-shadow:0 18px 40px rgba(0,0,0,.35);opacity:0;will-change:transform,opacity">
+                  <span style="display:block;width:100%;height:100%;background-image:{{ d.bg }};background-size:cover;background-position:center;border-radius:3px"></span>
+                  <figcaption style="position:absolute;left:10px;right:10px;bottom:8px;display:flex;justify-content:space-between;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-size:9px;color:#161826"><span>{{ d.label }}</span><span style="color:#0035cc">{{ d.n }}</span></figcaption>
+                </figure>
+              </sc-for>
+            </div>
+            <svg id="ba-outline" aria-hidden="true" viewBox="0 0 100 120" style="position:absolute;left:50%;top:58%;width:0%;transform:translate(-50%,-58%);overflow:visible;pointer-events:none">
+              <path d="M50 2C50 2 92 50 92 78A42 42 0 0 1 8 78C8 50 50 2 50 2Z" fill="none" stroke="#f5f5f7" stroke-width="2" vector-effect="non-scaling-stroke"></path>
+              <path d="M22 80L50 56L78 80" fill="none" stroke="#f5f5f7" stroke-width="2" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path>
+            </svg>
+            <div aria-hidden="true" style="position:absolute;inset:auto 0 0 0;height:55%;background:linear-gradient(rgba(22,24,38,0),rgba(22,24,38,.78));pointer-events:none"></div>
+            <span id="ba-lblB" style="position:absolute;left:16px;top:16px;display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;background:rgba(22,24,38,.72);color:#f5f5f7;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase"><i class="ph ph-clock-counter-clockwise"></i>Before</span>
+            <span id="ba-lblA" style="position:absolute;right:16px;top:16px;display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;background:#0035cc;color:#f5f5f7;opacity:0;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase"><i class="ph ph-sparkle"></i>After</span>
+            <div style="position:absolute;left:clamp(16px,3vw,40px);right:clamp(16px,3vw,40px);bottom:clamp(16px,3vw,36px);display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:var(--space-6);color:#f5f5f7">
+              <div style="display:flex;flex-direction:column;gap:var(--space-3);max-width:620px">
+                <div style="display:inline-grid;align-self:flex-start;justify-self:start"><img src="assets/roof-chevron.png" alt="" aria-hidden="true" style="display:block;width:0;min-width:100%;aspect-ratio:3.4/1;height:auto;object-fit:fill;margin:0 0 -3px;filter:brightness(0) invert(1)"><div style="display:flex;align-items:center;gap:var(--space-4);font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-size:12px;letter-spacing:.2em">Before &amp; after</div></div>
+                <h2 style="margin:0;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:800;font-size:clamp(34px,5vw,76px);line-height:.95;letter-spacing:-.02em;text-wrap:balance">Same house. Brand-new roof.</h2>
+                <p id="ba-hint" style="margin:0;font-size:clamp(14px,1.1vw,16px);line-height:1.5;color:#dfe1ec">Keep scrolling: the job plays out, then the new roof rises through our drop.</p>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:flex-end;gap:var(--space-3)">
+                <div id="ba-angles" role="group" aria-label="View the finished house from another angle" style="display:flex;flex-direction:column;align-items:flex-end;gap:var(--space-2);opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .5s ease, transform .5s cubic-bezier(.22,1,.36,1)">
+                  <span style="font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-size:10px;color:#dfe1ec">See it from another angle</span>
+                  <div style="display:flex;flex-wrap:wrap;justify-content:flex-end;gap:6px">
+                    <sc-for list="{{ baAngles }}" as="an" hint-placeholder-count="0">
+                      <button type="button" onClick="{{ an.pick }}" aria-pressed="{{ an.on }}" aria-label="{{ an.label }}" style="position:relative;width:clamp(56px,5.6vw,84px);aspect-ratio:4/3;padding:0;border-radius:6px;overflow:hidden;border:2px solid {{ an.bd }};background:#23253a;cursor:pointer;transition:border-color .25s, transform .25s" style-hover="transform:translateY(-2px)">
+                        <span style="display:block;width:100%;height:100%;background-image:{{ an.bg }};background-size:cover;background-position:center;opacity:{{ an.thumbOp }}"></span>
+                        <span style="position:absolute;left:0;right:0;bottom:0;padding:2px 4px;background:rgba(22,24,38,.72);color:#f5f5f7;font-size:9px;font-weight:500;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ an.label }}</span>
+                      </button>
+                    </sc-for>
+                  </div>
+                </div>
+                <div style="display:flex;align-items:center;gap:var(--space-3);font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-size:10px">
+                  <span>Before</span>
+                  <span style="position:relative;width:clamp(120px,14vw,200px);height:3px;border-radius:2px;background:rgba(245,245,247,.3)"><span id="ba-fill" style="position:absolute;left:0;top:0;bottom:0;width:0%;border-radius:2px;background:#f5f5f7"></span></span>
+                  <span>After</span>
+                  <span id="ba-pct" style="min-width:4ch;text-align:right;font-variant-numeric:tabular-nums">0%</span>
+                </div>
+                <button type="button" onPointerDown="{{ baHoldOn }}" onPointerUp="{{ baHoldOff }}" onPointerLeave="{{ baHoldOff }}" onKeyDown="{{ baKeyOn }}" onKeyUp="{{ baHoldOff }}" style="display:inline-flex;align-items:center;gap:var(--space-2);padding:10px 14px;border-radius:999px;border:1px solid rgba(245,245,247,.6);background:rgba(22,24,38,.35);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:#f5f5f7;cursor:pointer;user-select:none;touch-action:none;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-size:10px" style-hover="background:rgba(245,245,247,.16)"><i class="ph ph-hand-pointing" style="font-size:14px"></i>Hold to see before</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="work" data-screen-label="Recent work" style="padding:14vh clamp(16px,4vw,48px) 10vh">
+      <div style="max-width:1280px;margin:0 auto;display:flex;flex-direction:column;gap:clamp(40px,6vw,80px)">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:var(--space-6) clamp(28px,5vw,72px);align-items:end">
+          <div style="display:flex;flex-direction:column;gap:var(--space-6)">
+            <div style="display:inline-grid;align-self:flex-start;justify-self:start"><img src="assets/roof-chevron.png" alt="" aria-hidden="true" style="display:block;width:0;min-width:100%;aspect-ratio:3.4/1;height:auto;object-fit:fill;margin:0 0 -3px"><div style="display:flex;align-items:center;gap:var(--space-4);font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase">Recent work</div></div>
+            <h2 style="margin:0;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:800;font-size:clamp(32px,4vw,56px);line-height:1;letter-spacing:-.01em;text-wrap:balance">One house, start to finish</h2>
+          </div>
+          <p style="margin:0;font-size:clamp(16px,1.25vw,18px);line-height:1.6;color:#23253a;text-wrap:pretty;max-width:52ch">A brick cape near Cottleville: tarped, torn down to the deck boards, re-sheathed and roofed in architectural shingles. Here is how the job ran, and everything we shot along the way.</p>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:var(--space-6)">
+          <div style="font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#23253a">How the job ran</div>
+          <ol style="margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:clamp(12px,1.6vw,20px)">
+            <sc-for list="{{ steps }}" as="st" hint-placeholder-count="4">
+              <li style="display:flex;flex-direction:column;gap:var(--space-3)">
+                <button type="button" onClick="{{ st.open }}" aria-label="View {{ st.title }} photo larger" style="display:block;padding:0;border:1px solid #161826;border-radius:var(--radius-sm);overflow:hidden;aspect-ratio:4/3;background:#8e8c8c;cursor:zoom-in">
+                  <img src="{{ st.src }}" alt="{{ st.title }}" loading="lazy" style="display:block;width:100%;height:100%;object-fit:cover;transition:transform 700ms cubic-bezier(.22,1,.36,1)" style-hover="transform:scale(1.05)">
+                </button>
+                <div style="display:flex;align-items:baseline;gap:var(--space-3)"><span style="font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:800;font-size:18px">{{ st.title }}</span></div>
+                <p style="margin:0;font-size:15px;line-height:1.5;color:#23253a;text-wrap:pretty">{{ st.body }}</p>
+              </li>
+            </sc-for>
+          </ol>
+        </div>
+
+        <div id="gallery" style="display:flex;flex-direction:column;gap:var(--space-6)">
+          <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--space-4)">
+            <div style="font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#23253a">Project gallery · {{ galleryCount }}</div>
+            <div role="tablist" aria-label="Filter photos" style="display:flex;flex-wrap:wrap;gap:var(--space-2)">
+              <sc-for list="{{ filters }}" as="fl" hint-placeholder-count="5">
+                <button type="button" role="tab" aria-selected="{{ fl.on }}" onClick="{{ fl.pick }}" style="padding:10px 18px;border-radius:999px;border:1px solid #161826;background:{{ fl.bg }};color:{{ fl.fg }};cursor:pointer;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase" style-hover="border-color:#0035cc">{{ fl.label }}</button>
+              </sc-for>
+            </div>
+          </div>
+          <div style="column-count:{{ gCols }};column-gap:clamp(8px,1vw,14px)">
+            <sc-for list="{{ gallery }}" as="g" hint-placeholder-count="8">
+              <button type="button" onClick="{{ g.open }}" aria-label="{{ g.cap }}" style="position:relative;display:block;width:100%;aspect-ratio:{{ g.ar }};margin:0 0 clamp(8px,1vw,14px);break-inside:avoid;padding:0;border:1px solid #161826;border-radius:var(--radius-sm);overflow:hidden;background:#8e8c8c;cursor:zoom-in;text-align:left">
+                <img src="{{ g.src }}" alt="{{ g.cap }}" loading="lazy" style="display:block;width:100%;height:100%;object-fit:cover;object-position:{{ g.pos }};transition:transform 800ms cubic-bezier(.22,1,.36,1)" style-hover="transform:scale(1.05)">
+                <span style="position:absolute;left:10px;bottom:10px;padding:4px 9px;border-radius:999px;background:rgba(22,24,38,.72);color:#f5f5f7;pointer-events:none;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:10px;letter-spacing:.14em;text-transform:uppercase">{{ g.tag }}</span>
+              </button>
+            </sc-for>
+          </div>
+          <sc-if value="{{ hasMore }}" hint-placeholder-val="{{ true }}">
+            <div><button type="button" onClick="{{ showMore }}" class="btn" style="padding:14px 26px;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;border-color:#161826;color:#161826;background:transparent" style-hover="background:rgba(22,24,38,.08)">Show all {{ galleryCount }} photos<i class="ph ph-arrow-down"></i></button></div>
+          </sc-if>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" data-screen-label="Our story teaser" style="padding:10vh clamp(16px,4vw,48px) 14vh">
+      <a href="Our Story.dc.html" style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));align-items:stretch;border:1px solid #161826;border-radius:var(--radius-lg);overflow:hidden;background:#b3b1b1;transition:transform .4s cubic-bezier(.22,1,.36,1), box-shadow .4s" style-hover="transform:translateY(-4px);box-shadow:0 30px 60px rgba(22,24,38,.22)">
+        <div style="min-height:320px;background:#8e8c8c;overflow:hidden"><img src="assets/work/family.jpg" alt="The Barnes family" loading="lazy" style="display:block;width:100%;height:100%;object-fit:cover;object-position:center 38%"></div>
+        <div style="display:flex;flex-direction:column;justify-content:center;gap:var(--space-6);padding:clamp(28px,4vw,64px)">
+          <div style="display:inline-grid;align-self:flex-start;justify-self:start"><img src="assets/roof-chevron.png" alt="" aria-hidden="true" style="display:block;width:0;min-width:100%;aspect-ratio:3.4/1;height:auto;object-fit:fill;margin:0 0 -3px"><div style="font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;letter-spacing:.2em">Our story</div></div>
+          <h2 style="margin:0;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:800;font-size:clamp(32px,4vw,56px);line-height:1;letter-spacing:-.01em;text-wrap:balance">Small on purpose. Family-owned for good.</h2>
+          <p style="margin:0;max-width:46ch;font-size:clamp(16px,1.25vw,18px);line-height:1.6;color:#23253a;text-wrap:pretty">Why a roofer who helped build a $20 million company chose to start over small.</p>
+          <span style="align-self:flex-start;display:inline-flex;align-items:center;gap:var(--space-2);padding:16px 26px;border-radius:var(--radius-sm);background:#0035cc;color:#f5f5f7;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase">Read our story<i class="ph ph-arrow-right"></i></span>
+        </div>
+      </a>
+    </section>
+
+    <sc-if value="{{ lbOpen }}" hint-placeholder-val="{{ false }}">
+      <div role="dialog" aria-modal="true" aria-label="Photo viewer" onClick="{{ lbClose }}" style="position:fixed;inset:0;z-index:200;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--space-4);padding:clamp(16px,4vw,56px);background:rgba(12,14,24,.94);color:#f5f5f7">
+        <div role="img" aria-label="{{ lbCap }}" onClick="{{ stop }}" style="width:min(100%,1200px);height:78vh;background-image:{{ lbBg }};background-size:contain;background-repeat:no-repeat;background-position:center"></div>
+        <div onClick="{{ stop }}" style="display:flex;align-items:center;gap:var(--space-4);max-width:900px;width:100%">
+          <span style="font-variant-numeric:tabular-nums;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#c9cbe0">{{ lbCount }}</span>
+          <span style="flex:1;font-size:15px;line-height:1.45">{{ lbCap }}</span>
+          <button type="button" onClick="{{ lbPrev }}" aria-label="Previous photo" style="width:44px;height:44px;border-radius:999px;border:1px solid rgba(245,245,247,.5);background:transparent;color:#f5f5f7;font-size:18px;cursor:pointer" style-hover="background:rgba(245,245,247,.12)"><i class="ph ph-arrow-left"></i></button>
+          <button type="button" onClick="{{ lbNext }}" aria-label="Next photo" style="width:44px;height:44px;border-radius:999px;border:1px solid rgba(245,245,247,.5);background:transparent;color:#f5f5f7;font-size:18px;cursor:pointer" style-hover="background:rgba(245,245,247,.12)"><i class="ph ph-arrow-right"></i></button>
+        </div>
+        <button type="button" onClick="{{ lbClose }}" aria-label="Close" style="position:absolute;top:16px;right:16px;width:44px;height:44px;border-radius:999px;border:1px solid rgba(245,245,247,.5);background:transparent;color:#f5f5f7;font-size:20px;cursor:pointer" style-hover="background:rgba(245,245,247,.12)"><i class="ph ph-x"></i></button>
+      </div>
+    </sc-if>
+
+    <section id="area" data-screen-label="Service area" style="position:relative;display:grid;grid-template-columns:minmax(0,1fr);background:#9c9a9a;overflow:hidden">
+      <div style="grid-row:1;grid-column:1;position:relative;min-height:{{ mapMinH }}">
+        <iframe id="area-map" src="Service Area Backdrop.html" title="Service area map with the towns we roof in" style="position:absolute;inset:0;width:100%;height:100%;border:0;display:block;background:#9c9a9a"></iframe>
+        <div aria-hidden="true" style="position:absolute;left:0;right:0;top:0;height:80px;background:linear-gradient(#9c9a9a,rgba(156,154,154,0));pointer-events:none"></div>
+        <div aria-hidden="true" style="position:absolute;left:0;right:0;bottom:0;height:80px;background:linear-gradient(rgba(156,154,154,0),#9c9a9a);pointer-events:none"></div>
+      </div>
+      <div style="grid-row:{{ cardRow }};grid-column:1;align-self:center;position:relative;z-index:1;pointer-events:none;padding:clamp(16px,4vw,48px);padding-top:{{ cardPadTop }}">
+        <div style="max-width:1280px;margin:0 auto">
+          <div style="pointer-events:auto;max-width:480px;display:flex;flex-direction:column;gap:var(--space-6);padding:clamp(26px,3vw,44px);background:rgba(245,245,247,.74);backdrop-filter:blur(16px) saturate(1.2);-webkit-backdrop-filter:blur(16px) saturate(1.2);border:1px solid rgba(22,24,38,.55);border-radius:var(--radius-md);box-shadow:0 24px 60px rgba(22,24,38,.22);color:#161826">
+            <div style="display:inline-grid;align-self:flex-start;justify-self:start"><img src="assets/roof-chevron.png" alt="" aria-hidden="true" style="display:block;width:0;min-width:100%;aspect-ratio:3.4/1;height:auto;object-fit:fill;margin:0 0 -3px"><div style="display:flex;align-items:center;gap:var(--space-4);font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-size:12px;letter-spacing:.2em">Service area</div></div>
+            <h2 style="margin:0;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:800;font-size:clamp(30px,3.4vw,48px);line-height:1;letter-spacing:-.01em;text-wrap:balance">St. Louis metro, both sides of the river</h2>
+            <p style="margin:0;font-size:16px;line-height:1.55;color:#23253a;text-wrap:pretty">Every blue roof on the map is a town we work in, all within reach of the shop in Cottleville. Tap a county to zoom in.</p>
+            <form onSubmit="{{ checkZip }}" style="display:flex;flex-direction:column;gap:var(--space-2)">
+              <label for="zip" style="font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#23253a">Check your ZIP</label>
+              <div style="display:flex;gap:var(--space-2)">
+                <input id="zip" inputmode="numeric" maxlength="5" autocomplete="postal-code" placeholder="63304" value="{{ zip }}" onInput="{{ setZip }}" style="flex:1;min-width:0;height:48px;box-sizing:border-box;padding:0 14px;font:500 17px var(--font-body);letter-spacing:.08em;color:#161826;background:#f5f5f7;border:1px solid #161826;border-radius:var(--radius-sm);outline:none" style-focus="border-color:#0035cc;box-shadow:0 0 0 3px rgba(0,53,204,.2)">
+                <button type="submit" style="height:48px;padding:0 18px;border:1px solid #161826;border-radius:var(--radius-sm);background:#161826;color:#f5f5f7;cursor:pointer;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-size:12px" style-hover="background:#23253a">Check</button>
+              </div>
+              <sc-if value="{{ zipShown }}" hint-placeholder-val="{{ false }}">
+                <div role="status" style="display:flex;align-items:flex-start;gap:var(--space-2);font-size:14px;line-height:1.45;color:{{ zipColor }}"><i class="{{ zipIcon }}" style="font-size:18px;flex:none;margin-top:1px"></i><span>{{ zipMsg }}</span></div>
+              </sc-if>
+            </form>
+            <div style="display:flex;flex-wrap:wrap;gap:6px">
+              <sc-for list="{{ countyChips }}" as="c" hint-placeholder-count="10">
+                <button type="button" onClick="{{ c.pick }}" aria-pressed="{{ c.on }}" style="padding:8px 14px;border-radius:999px;border:1px solid {{ c.bd }};background:{{ c.bg }};color:{{ c.fg }};cursor:pointer;font-size:12px;font-weight:500;transition:background .2s" style-hover="border-color:#0035cc">{{ c.label }}</button>
+              </sc-for>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:var(--space-3)">
+              <a href="#estimate" onClick="{{ goEstimate }}" style="display:inline-flex;align-items:center;gap:var(--space-2);padding:16px 26px;border-radius:var(--radius-sm);background:#0035cc;color:#f5f5f7;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-size:12px;letter-spacing:.14em" style-hover="background:#002aa8;color:#f5f5f7">Book a free estimate<i class="ph ph-arrow-right"></i></a>
+              <a href="tel:+13142037003" style="display:inline-flex;align-items:center;gap:var(--space-2);padding:16px 26px;border-radius:var(--radius-sm);border:1px solid #161826;color:#161826;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-size:12px;letter-spacing:.14em" style-hover="background:rgba(22,24,38,.08)"><i class="ph ph-phone"></i>(314) 203-7003</a>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:var(--space-3) var(--space-5);padding-top:var(--space-4);border-top:1px solid rgba(22,24,38,.2);font-size:12px;color:#23253a">
+              <span style="display:inline-flex;align-items:center;gap:6px"><span style="width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-bottom:7px solid #0035cc"></span>Towns we roof in</span>
+              <span style="display:inline-flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:999px;background:#0035cc;box-shadow:0 0 0 2px #f5f5f7"></span>The shop</span>
+              <span style="display:inline-flex;align-items:center;gap:6px"><span style="width:18px;height:3px;border-radius:2px;background:#0035cc"></span>Mississippi</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="estimate" data-screen-label="Free estimate" style="padding:14vh 0 0 max(clamp(16px,4vw,48px), calc((100vw - 1280px) / 2));background:#f5f5f7;color:#161826;overflow:hidden">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:clamp(32px,5vw,72px);align-items:stretch">
+        <div style="display:flex;flex-direction:column;gap:var(--space-8);max-width:520px;padding-right:clamp(16px,4vw,48px);padding-bottom:14vh">
+          <div style="display:inline-grid;align-self:flex-start;justify-self:start"><img src="assets/roof-chevron.png" alt="" aria-hidden="true" style="display:block;width:0;min-width:100%;aspect-ratio:3.4/1;height:auto;object-fit:fill;margin:0 0 -3px"><div style="display:flex;align-items:center;gap:var(--space-4);font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase">Free estimate</div></div>
+          <h2 style="margin:0;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:800;font-size:clamp(32px,4vw,56px);line-height:1;letter-spacing:-.01em;text-wrap:balance">Get your free estimate</h2>
+          <p style="margin:0;font-size:clamp(16px,1.25vw,18px);line-height:1.6;color:#34364a;text-wrap:pretty">Send the form and we call you back within one business day with questions, straight answers and a written number. Prefer to skip the form?</p>
+          <div><a href="tel:+13142037003" class="btn" style="padding:14px 26px;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:13px;letter-spacing:.1em;background:#0035cc;border-color:#0035cc;color:#f5f5f7" style-hover="background:#002aa8;border-color:#002aa8"><i class="ph ph-phone"></i>Call (314) 203-7003</a></div>
+          <figure style="margin:0;display:flex;flex-direction:column;gap:var(--space-3);max-width:420px">
+            <div style="aspect-ratio:4/3;border-radius:var(--radius-sm);overflow:hidden;border:1px solid #161826;background:#d9d9dd"><img src="assets/work/tony-repair.jpg" alt="Tony Barnes working on a roof" loading="lazy" style="display:block;width:100%;height:100%;object-fit:cover;object-position:center 30%"></div>
+            <figcaption style="font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:#34364a">On the roof, not behind a desk.</figcaption>
+          </figure>
+        </div>
+        <div id="estimate-panel" style="padding:clamp(24px,3.2vw,48px) max(clamp(16px,4vw,48px), calc((100vw - 1280px) / 2)) clamp(32px,4vw,56px) clamp(24px,3.2vw,48px);--color-accent:#f5f5f7;--color-text:#f5f5f7;--color-divider:rgba(245,245,247,.38);background:radial-gradient(120% 90% at 20% 0%, #0a45e0 0%, #0035cc 55%, #002aa8 100%);color:#f5f5f7;border-radius:var(--radius-lg) 0 0 0;box-shadow:-24px 0 60px rgba(0,42,168,.28);transition:transform 1100ms cubic-bezier(.22,1,.36,1), clip-path 1100ms cubic-bezier(.22,1,.36,1);transform:{{ panelTransform }};clip-path:{{ panelClip }}">
+          <sc-if value="{{ notSubmitted }}" hint-placeholder-val="{{ true }}">
+            <form onSubmit="{{ submit }}" style="display:flex;flex-direction:column;gap:var(--space-6)">
+              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:var(--space-6)">
+                <div class="field"><label for="f-name">Name</label><input class="input" id="f-name" name="name" required="" placeholder="Your name"></div>
+                <div class="field"><label for="f-phone">Phone</label><input class="input" id="f-phone" name="phone" type="tel" required="" placeholder="(555) 000-0000"></div>
+              </div>
+              <div class="field"><label for="f-addr">Job address</label><input class="input" id="f-addr" name="address" placeholder="Street, town"></div>
+              <div class="field"><label id="f-svc">Service</label>
+                <div class="seg" role="radiogroup" aria-labelledby="f-svc" style="display:flex;flex-wrap:wrap">
+                  <label class="seg-opt"><input type="radio" name="service" value="replacement" checked="">Roof replacement</label>
+                  <label class="seg-opt"><input type="radio" name="service" value="repair">Roof repair</label>
+                  <label class="seg-opt"><input type="radio" name="service" value="gutters">Gutters</label>
+                  <label class="seg-opt"><input type="radio" name="service" value="siding">Siding</label>
+                  <label class="seg-opt"><input type="radio" name="service" value="unsure">Not sure yet</label>
+                </div>
+              </div>
+              <div class="field"><label id="f-when">How soon</label>
+                <div class="seg" role="radiogroup" aria-labelledby="f-when" style="display:flex;flex-wrap:wrap">
+                  <label class="seg-opt"><input type="radio" name="when" value="asap" checked="">As soon as possible</label>
+                  <label class="seg-opt"><input type="radio" name="when" value="month">Within a month</label>
+                  <label class="seg-opt"><input type="radio" name="when" value="season">This season</label>
+                  <label class="seg-opt"><input type="radio" name="when" value="planning">Just planning</label>
+                </div>
+              </div>
+              <div class="field"><label for="f-msg">What's going on with the roof?</label><textarea class="input" id="f-msg" name="message" rows="4" placeholder="Leak over the kitchen, hail last spring, etc."></textarea></div>
+              <button type="submit" class="btn btn-primary btn-block" style="padding:14px 26px;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase">Request my free estimate</button>
+              <p style="margin:0;font-size:12px;color:#dfe4f7">No spam, no pressure. One call back.</p>
+            </form>
+          </sc-if>
+          <sc-if value="{{ submitted }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;flex-direction:column;gap:var(--space-4);padding:var(--space-8) 0">
+              <i class="ph ph-check-circle" style="font-size:36px;color:#f5f5f7"></i>
+              <h3 style="margin:0;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:800;font-size:24px">Request received</h3>
+              <p style="margin:0;font-size:15px;line-height:1.55;color:#dfe4f7">We'll call you back within one business day.</p>
+              <div><button type="button" class="btn btn-secondary" onClick="{{ resetForm }}">Send another</button></div>
+            </div>
+          </sc-if>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer data-screen-label="Footer" style="position:relative;padding:clamp(300px,34vw,560px) clamp(16px,4vw,48px) clamp(16px,3vw,40px);background-color:#ffffff;overflow:hidden;background-repeat:no-repeat;color:#f5f5f7">
+    <img src="assets/footer-crew.png" alt="" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 12%;display:block;pointer-events:none">
+    <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg, rgba(22,24,38,0) 0%, rgba(22,24,38,0) 38%, rgba(22,24,38,.55) 60%, rgba(22,24,38,.78) 100%)"></div>
+    <div style="position:relative;max-width:1280px;margin:0 auto;display:flex;flex-direction:column;gap:clamp(20px,3vh,32px);padding:clamp(18px,2.2vw,28px) clamp(20px,3vw,40px);border-radius:var(--radius-lg);background:linear-gradient(135deg, rgba(255,255,255,.26) 0%, rgba(255,255,255,.12) 100%);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);border:1px solid rgba(255,255,255,.45);box-shadow:inset 0 1px 0 rgba(255,255,255,.6), 0 24px 60px rgba(0,0,0,.3);text-shadow:0 1px 3px rgba(0,0,0,.55)">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:clamp(20px,3vw,40px)">
+        <div style="display:flex;flex-direction:column;gap:var(--space-4);grid-column:span 1;min-width:0">
+          <img src="assets/barnes-logo-blue.png" alt="Barnes Roofing and Construction" style="width:104px;height:auto;border-radius:var(--radius-md)">
+          <p style="margin:0;max-width:34ch;font-size:14px;line-height:1.55;color:#e9e9ed">Family-owned roofing and construction for the St. Louis metro.</p>
+          <span style="align-self:flex-start;display:inline-flex;align-items:center;gap:var(--space-2);padding:5px 10px;border:1px solid rgba(245,245,247,.6);border-radius:999px;font-size:11px;letter-spacing:.08em"><i class="ph ph-shield-check"></i>Licensed &amp; insured · MO</span>
+        </div>
+        <nav aria-label="Site" style="display:flex;flex-direction:column;gap:var(--space-2)">
+          <div style="font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#d6d9ff">Explore</div>
+          <sc-for list="{{ footerLinks }}" as="l" hint-placeholder-count="5">
+            <a href="{{ l.href }}" onClick="{{ l.onClick }}" style="font-size:14px;color:#f5f5f7" style-hover="text-decoration:underline">{{ l.label }}</a>
+          </sc-for>
+        </nav>
+        <div style="display:flex;flex-direction:column;gap:var(--space-2)">
+          <div style="font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#d6d9ff">Contact</div>
+          <a href="tel:+13142037003" style="font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:20px" style-hover="text-decoration:underline">(314) 203-7003</a>
+          <span style="font-size:14px;color:#e9e9ed">Mon–Sat · 7a–7p</span>
+          <address style="font-style:normal;font-size:14px;line-height:1.5;color:#e9e9ed">5377 State Hwy N Suite 552<br>Cottleville MO 63304</address>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:var(--space-4);align-items:flex-start">
+          <a href="#estimate" onClick="{{ goEstimate }}" class="btn" style="white-space:nowrap;padding:16px 28px;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;background:#0035cc;border-color:#d6d9ff;color:#f5f5f7" style-hover="background:#002aa8;border-color:#002aa8">Get a free estimate<i class="ph ph-arrow-right"></i></a>
+        </div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--space-4);padding-top:var(--space-4);border-top:1px solid rgba(245,245,247,.3);font-size:12px;color:#e9e9ed">
+        <span>© 2026 Barnes Roofing &amp; Construction · Cottleville, Missouri</span>
+        <span style="display:flex;align-items:center;gap:var(--space-6)"><button type="button" onClick="{{ replay }}" style="all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:4px;color:#e9e9ed"><i class="ph ph-arrow-counter-clockwise"></i>Replay intro</button></span>
+      </div>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;loaderSpeed&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:1,&quot;min&quot;:0.5,&quot;max&quot;:2,&quot;step&quot;:0.1,&quot;unit&quot;:&quot;×&quot;,&quot;tsType&quot;:&quot;number&quot;}}">
+class Component extends DCLogic {
+  state = { phase: 0, scrolled: false, w: window.innerWidth, menu: false, active: 'top', idx: false, svcH: 3000, submitted: false };
+  componentDidMount() {
+    this.onScroll = () => this.tick();
+    this.onResize = () => { this.setState({ w: window.innerWidth }); this.measure(); };
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    window.addEventListener('resize', this.onResize);
+    this.run();
+    this.measure();
+
+    window.addEventListener('keydown', this.onKey);
+    this.bwTimer = setInterval(() => this.setState(s => ({ bw: ((s.bw || 0) + 1) % 5 })), 2600);
+    try {
+      const sv = new URLSearchParams(location.search).get('service');
+      if (sv) setTimeout(() => { const r = document.querySelector('input[name=service][value=' + sv + ']'); if (r) r.checked = true; if (location.hash === '#estimate') { const el = document.getElementById('estimate'); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 92 }); } }, 4200);
+    } catch (e) {}
+    window.addEventListener('message', this.onMsg);
+    if (document.fonts) document.fonts.ready.then(() => this.measure());
+  }
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScroll);
+    window.removeEventListener('resize', this.onResize);
+    window.removeEventListener('keydown', this.onKey);
+    clearInterval(this.bwTimer);
+    window.removeEventListener('message', this.onMsg);
+    (this.timers || []).forEach(clearTimeout);
+    if (this.io) this.io.disconnect();
+  }
+  baTick(vh) {
+    const sec = document.getElementById('transform'); if (!sec) return;
+    const r = sec.getBoundingClientRect();
+    const raw = Math.min(1, Math.max(0, (-r.top) / Math.max(1, sec.offsetHeight - vh)));
+    const p = Math.min(1, raw / 0.85), ease = p * p * (3 - 2 * p);
+    const size = 6 + Math.pow(ease, 1.6) * 520;
+    const $ = id => document.getElementById(id);
+    const after = $('ba-after'), out = $('ba-outline'), before = $('ba-before');
+    const deck = $('ba-deck'), N = 5;
+    if (deck) {
+      deck.style.opacity = p > 0.06 && p < 0.9 ? 1 : 0;
+      for (let i = 0; i < N; i++) {
+        const c = $('ba-d' + i); if (!c) continue;
+        const start = 0.08 + i * 0.1, t = Math.min(1, Math.max(0, (p - start) / 0.08));
+        const out2 = Math.min(1, Math.max(0, (p - 0.72) / 0.12));
+        const rot = [-7, 5, -3, 8, -5][i], k = t * (1 - out2);
+        c.style.opacity = k;
+        c.style.transform = 'translate(' + ((1 - t) * 140 + out2 * (i - 2) * 60) + 'px,' + ((1 - t) * -40 - out2 * 120) + 'px) rotate(' + (rot * t + (1 - t) * 20) + 'deg) scale(' + (0.85 + t * 0.15) + ')';
+        c.style.zIndex = i;
+      }
+    }
+    const ang = $('ba-angles');
+    if (ang) { const on = p >= 0.9; ang.style.opacity = on ? 1 : 0; ang.style.transform = on ? 'translateY(0)' : 'translateY(12px)'; ang.style.pointerEvents = on ? 'auto' : 'none'; }
+    if (after) {
+      const full = p >= 0.98;
+      after.style.webkitMaskSize = after.style.maskSize = (full ? 3000 : size) + '% auto';
+      after.style.opacity = this.baHold ? 0 : 1;
+    }
+    if (out) { out.style.width = size + '%'; out.style.opacity = this.baHold ? 0 : Math.max(0, 1 - ease * 1.6); }
+    if (before) { before.style.transform = 'scale(' + (1 + ease * 0.06) + ')'; before.style.filter = 'saturate(' + (1 - ease * 0.5) + ') brightness(' + (1 - ease * 0.15) + ')'; }
+    const a = this.baHold ? 0 : ease;
+    if ($('ba-lblA')) $('ba-lblA').style.opacity = a;
+    if ($('ba-lblB')) $('ba-lblB').style.opacity = 1 - a * 0.6;
+    if ($('ba-fill')) $('ba-fill').style.width = (p * 100) + '%';
+    if ($('ba-pct')) $('ba-pct').textContent = Math.round(p * 100) + '%';
+  }
+  onMsg = e => {
+    const d = e.data || {};
+    if (d.type === 'barnes-focus') this.setState({ areaFocus: d.county });
+  };
+  postMap(msg) {
+    const f = document.getElementById('area-map');
+    if (f && f.contentWindow) f.contentWindow.postMessage(msg, '*');
+  }
+  onKey = e => {
+    if ((this.state.lb ?? -1) < 0) return;
+    if (e.key === 'Escape') this.setState({ lb: -1 });
+    if (e.key === 'ArrowRight') this.stepLb(1);
+    if (e.key === 'ArrowLeft') this.stepLb(-1);
+  };
+  stepLb(d) {
+    const n = (this.lbList || []).length;
+    if (n) this.setState(s => ({ lb: (s.lb + d + n) % n }));
+  }
+  measure() {
+    const track = document.getElementById('svc-track');
+    if (!track) return;
+    const dist = Math.max(0, track.scrollWidth - window.innerWidth);
+    this.dist = dist;
+    this.setState({ svcH: window.innerHeight + dist }, () => this.tick());
+  }
+  tick() {
+    const y = window.scrollY, vh = window.innerHeight;
+    const svc = document.getElementById('services'), track = document.getElementById('svc-track'), bar = document.getElementById('svc-progress');
+    if (svc && track) {
+      const r = svc.getBoundingClientRect();
+      const span = Math.max(1, svc.offsetHeight - vh);
+      const p = Math.min(1, Math.max(0, -r.top / span));
+      track.style.transform = `translateX(${-p * (this.dist || 0)}px)`;
+      if (bar) bar.style.width = (p * 100) + '%';
+    }
+    this.baTick(vh);
+    if (!this.mapPlayed) {
+      const am = document.getElementById('area-map');
+      if (am && am.getBoundingClientRect().top < vh * 0.7) { this.mapPlayed = true; this.postMap({ type: 'barnes-play' }); }
+    }
+    if (!this.state.panelIn) {
+      const pnl = document.getElementById('estimate-panel');
+      if (pnl && pnl.getBoundingClientRect().top < vh * 0.85) this.setState({ panelIn: true });
+    }
+    let aSvc = 0;
+    for (let i = 0; i < 4; i++) { const el = document.getElementById('svc-' + (i + 1)); if (el && el.getBoundingClientRect().top <= vh * 0.45) aSvc = i; }
+    if (aSvc !== (this.state.activeSvc ?? 0)) this.setState({ activeSvc: aSvc });
+    let active = 'top';
+    for (const id of ['top', 'services', 'work', 'about', 'area', 'estimate']) {
+      const el = document.getElementById(id);
+      if (el && el.getBoundingClientRect().top <= vh * 0.4) active = id;
+    }
+    const scrolled = y > 24, idx = y > vh * 0.6;
+    const s = this.state;
+    if (scrolled !== s.scrolled || active !== s.active || idx !== s.idx) this.setState({ scrolled, active, idx });
+  }
+  run() {
+    (this.timers || []).forEach(clearTimeout);
+    const speed = this.props.loaderSpeed ?? 1;
+    this.setState({ phase: 0, menu: false });
+    const at = [[1, 250], [2, 1250], [3, 2600], [4, 3700]];
+    this.timers = at.map(([p, t]) => setTimeout(() => this.setState({ phase: p }), t / speed));
+  }
+  go(id) {
+    return e => {
+      e.preventDefault();
+      this.setState({ menu: false });
+      const el = document.getElementById(id);
+      if (!el) return;
+      const top = id === 'top' ? 0 : el.getBoundingClientRect().top + window.scrollY - (id.startsWith('svc-') ? 108 : 92);
+      window.scrollTo({ top, behavior: 'smooth' });
+    };
+  }
+  areaVals(wide) {
+    const s = this.state, zip = s.zip || '', res = s.zipRes;
+    const names = ['St. Charles', 'St. Louis Co.', 'St. Louis City', 'Jefferson', 'Franklin', 'Warren', 'Lincoln', 'Madison', 'St. Clair', 'Monroe'];
+    const msgs = {
+      yes: ["Looks like you're in our area. Book the free estimate and we'll call you back.", '#0a3a9e', 'ph ph-check-circle'],
+      no: ["Just outside our usual lines, call anyway. For the right job, we'll drive.", '#23253a', 'ph ph-info'],
+      bad: ['Enter a 5-digit ZIP code.', '#23253a', 'ph ph-warning-circle']
+    };
+    const m = msgs[res] || msgs.bad;
+    return {
+      mapMinH: wide ? 'min(100vh, 900px)' : 'max(62vh, 460px)',
+      cardRow: wide ? '1' : '2',
+      cardPadTop: wide ? 'clamp(96px,12vh,140px)' : '0px',
+      zip, setZip: e => this.setState({ zip: e.target.value.replace(/\D/g, '').slice(0, 5), zipRes: null }),
+      checkZip: e => {
+        e.preventDefault();
+        const z = this.state.zip || '';
+        this.setState({ zipRes: z.length !== 5 ? 'bad' : (['630', '631', '633', '620', '622'].includes(z.slice(0, 3)) ? 'yes' : 'no') });
+      },
+      zipShown: !!res, zipMsg: m[0], zipColor: m[1], zipIcon: m[2],
+      countyChips: names.map(n => {
+        const on = s.areaFocus === n;
+        return { label: n, on: on ? 'true' : 'false', bg: on ? '#0035cc' : 'rgba(245,245,247,.6)', fg: on ? '#f5f5f7' : '#161826', bd: on ? '#0035cc' : 'rgba(22,24,38,.45)',
+          pick: () => { this.postMap({ type: 'barnes-zoom', county: on ? null : n }); this.setState({ areaFocus: on ? null : n }); } };
+      })
+    };
+  }
+  swapWord() {
+    const e = React.createElement, i = this.state.bw || 0;
+    const words = [['right.', 'a'], ['to last.', 'b'], ['for storms.', 'c'], ['by family.', 'a'], ['for you.', 'b']];
+    const [word, style] = words[i];
+    const badge = (bg, delay) => e('span', { 'data-bw': 1, key: 'm' + i, 'aria-hidden': true, style: { display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '.78em', height: '.78em', marginRight: '.16em', borderRadius: '.16em', background: bg, verticalAlign: '-.02em', boxShadow: '0 .08em .2em rgba(0,42,168,.3)', animation: 'bwDrop 700ms cubic-bezier(.34,1.56,.64,1) ' + delay + ' both', flex: 'none' } },
+      e('img', { src: 'assets/barnes-mark.png', alt: '', style: { height: '72%', width: 'auto', display: 'block' } }));
+    const txt = { display: 'inline-block', animation: 'bwIn 600ms cubic-bezier(.22,1,.36,1) 80ms both' };
+    let inner;
+    if (style === 'a') inner = [e('span', { key: 't' + i, 'data-bw': 1, style: { ...txt, color: '#0035cc' } }, word)];
+    else if (style === 'b') inner = [e('span', { key: 'p' + i, 'data-bw': 1, style: { display: 'inline-flex', alignItems: 'center', gap: '.18em', padding: '.02em .26em .06em', borderRadius: '.2em', background: 'radial-gradient(120% 140% at 20% 0%, #0a45e0 0%, #0035cc 55%, #002aa8 100%)', color: '#f5f5f7', boxShadow: '0 .12em .3em rgba(0,42,168,.3)', animation: 'bwIn 600ms cubic-bezier(.22,1,.36,1) both' } }, word)];
+    else inner = [e('span', { key: 't' + i, 'data-bw': 1, style: { ...txt, position: 'relative', color: '#161826' } }, word,
+      e('span', { 'data-bw': 1, 'aria-hidden': true, style: { position: 'absolute', left: 0, right: 0, bottom: '-.02em', height: '.1em', borderRadius: '.05em', background: '#0035cc', transformOrigin: 'left', animation: 'bwBar 700ms cubic-bezier(.22,1,.36,1) 250ms both' } }))];
+    return e('span', { style: { display: 'block', whiteSpace: 'nowrap', fontSize: 'min(1em, 11vw)', minHeight: '1.05em' } },
+      e('span', { className: 'sr', style: { position: 'absolute', width: 1, height: 1, overflow: 'hidden', clip: 'rect(0 0 0 0)' } }, 'right.'),
+      e('span', { 'aria-hidden': true, style: { display: 'inline-flex', alignItems: 'center' } }, ...inner));
+  }
+  workVals(w) {
+    const s = this.state, cat = s.cat ?? 'all', ba = s.ba ?? 50, lb = s.lb ?? -1;
+    const G = [
+      ['g-a4.png','aerial','l','Finished roof from the drone, crew cleaning up the yard'],
+      ['g-t9.jpg','tearoff','l','Tear-off day: old layers straight into the trailer'],
+      ['g-after-p2.jpg','finished','p','Street view, new charcoal shingles'],
+      ['g-i1.jpg','install','l','New courses going on over synthetic underlayment'],
+      ['g-t4.jpg','tearoff','l','Stripped to the deck boards, every soft spot gets found'],
+      ['g-a5.png','aerial','l','Ridge vent and chimney flashing, finished'],
+      ['g-t8.jpg','tearoff','p','Pitchforks and patience'],
+      ['g-f1.jpg','finished','l','Clean lines up to the chimney'],
+      ['g-i4.jpg','install','p','Checking the finished work'],
+      ['g-t3.jpg','tearoff','l','Tarps down before the first shingle comes off'],
+      ['g-a3.png','aerial','l','Straight down on the dormer'],
+      ['g-i3.jpg','install','l','Crew working the upper slope'],
+      ['g-t2.jpg','tearoff','l','Old cedar layer coming off'],
+      ['g-a6.png','aerial','l','Two roofs, one crew'],
+      ['g-repair.jpg','install','l','Storm-damage patch, marked and re-nailed'],
+      ['g-t5.jpg','tearoff','l','Three layers deep'],
+      ['g-a7.png','aerial','l','Overhead: the whole job site'],
+      ['g-i2.jpg','install','l','Shingles meet underlayment'],
+      ['g-t6.jpg','tearoff','l','Many hands, one roof'],
+      ['g-f2.jpg','finished','l','Blue sky, finished slope'],
+      ['g-i5.jpg','install','p','Final walk on the finished roof'],
+      ['g-t7.jpg','tearoff','l','Materials staged, tear-off underway'],
+      ['g-flashing.jpg','install','l','Chimney step flashing, by hand'],
+      ['g-t1.jpg','tearoff','l','Down to the boards']
+    ];
+    const tags = { tearoff: 'Tear-off', install: 'Install', finished: 'Finished', aerial: 'Aerial' };
+    const all = G.map(([f, c, o, cap]) => ({ src: 'assets/work/' + f, c, o, cap, tag: tags[c] }));
+    const filtered = cat === 'all' ? all : all.filter(g => g.c === cat);
+    const limit = cat === 'all' && !s.more ? 14 : filtered.length;
+    const cols = w >= 1000 ? 4 : w >= 640 ? 3 : 2;
+    const span = (g, i) => {
+      if (cols === 2) return g.o === 'p' ? ['span 1', 'span 2'] : ['span 2', 'span 2'];
+      if (cols === 6) return g.o === 'p' ? ['span 2', 'span 3'] : (i % 5 === 0 ? ['span 4', 'span 3'] : ['span 3', 'span 2']);
+      return g.o === 'p' ? ['span 3', 'span 4'] : (i % 7 === 0 ? ['span 6', 'span 4'] : ['span 4', 'span 3']);
+    };
+    const steps = [
+      ['01', 'Protect', 'Tarps over the siding, beds and lawn before a single shingle comes off.', 'assets/work/step-protect.jpg'],
+      ['02', 'Tear-off', 'Every layer down to the deck, so bad boards get found and replaced.', 'assets/work/step-tearoff.png'],
+      ['03', 'Install', 'Underlayment, flashing and shingles, the Barnes crew, not a sub.', 'assets/work/step-install.png'],
+      ['04', 'Final walk', 'Magnet sweep, cleanup and a final inspection before we call it done.', 'assets/work/step-finished.png']
+    ];
+    const stepItems = steps.map(([n, title, body, src]) => ({ src, cap: title + ', ' + body }));
+    this.lbList = s.lbSet === 'steps' ? stepItems : (s.lbSet || '').startsWith('svc') ? (this.svcPhotos || [])[+s.lbSet.slice(3)] || [] : filtered;
+    const cur = lb >= 0 ? this.lbList[lb] : null;
+    const openAt = (set, i) => () => this.setState({ lbSet: set, lb: i });
+    const counts = { all: all.length };
+    all.forEach(g => counts[g.c] = (counts[g.c] || 0) + 1);
+    return {
+      ba, baLeft: ba + '%', baClip: `inset(0 0 0 ${ba}%)`,
+      setBa: e => this.setState({ ba: +e.target.value }),
+      projectFacts: [
+        { k: 'Project', v: 'Brick cape, full roof replacement' },
+        { k: 'Scope', v: 'Tear-off to the deck, new sheathing where needed, underlayment, flashing, architectural shingles' },
+        { k: 'Crew', v: 'Barnes crew start to finish' }
+      ],
+      steps: steps.map(([n, title, body, src], i) => ({ n, title, body, src, open: openAt('steps', i) })),
+      filters: [['all', 'All'], ['tearoff', 'Tear-off'], ['install', 'Install'], ['finished', 'Finished'], ['aerial', 'Aerial']].map(([k, label]) => ({
+        label: label + ' ' + (counts[k] || 0), on: cat === k ? 'true' : 'false',
+        bg: cat === k ? '#161826' : 'transparent', fg: cat === k ? '#f5f5f7' : '#161826',
+        pick: () => this.setState({ cat: k, more: false })
+      })),
+      galleryCount: filtered.length,
+      gCols: cols,
+      gallery: filtered.slice(0, limit).map((g, i) => { return { ...g, ar: g.o === 'p' ? '3/4' : (i % 4 === 1 ? '1/1' : '4/3'), pos: 'center', open: openAt('gallery', i) }; }),
+      hasMore: limit < filtered.length,
+      showMore: () => this.setState({ more: true }),
+      lbOpen: !!cur, lbBg: cur ? `url("${cur.src}")` : 'none', lbCap: cur ? cur.cap : '',
+      lbCount: cur ? `${lb + 1} / ${this.lbList.length}` : '',
+      lbClose: () => this.setState({ lb: -1 }),
+      lbPrev: e => { e.stopPropagation(); this.stepLb(-1); },
+      lbNext: e => { e.stopPropagation(); this.stepLb(1); },
+      stop: e => e.stopPropagation()
+    };
+  }
+  renderVals() {
+    const { phase, scrolled, w, menu, active, idx, svcH, submitted } = this.state;
+    const wide = w >= 1280;
+    const met = phase >= 1, docked = phase >= 3, shown = phase >= 4;
+    const barPx = scrolled ? 92 : 128;
+    const nav = [['Services', 'services'], ['Recent work', 'work'], ['Service area', 'area']];
+    const leftLinks = nav.map(([label, id], i) => ({
+      label, href: '#' + id,
+      color: active === id ? '#e9e9ed' : '#c9cbe0',
+      underline: active === id ? 'scaleX(1)' : 'scaleX(0)',
+      opacity: shown ? 1 : 0,
+      transform: shown ? 'translateX(0)' : 'translateX(16px)',
+      delay: shown ? `${(2 - i) * 90}ms` : '0ms',
+      onClick: this.go(id),
+      caret: id === 'services' ? 'ph ph-caret-down' : '',
+      enter: id === 'services' ? () => { clearTimeout(this.ddT); this.setState({ dd: true }); } : undefined,
+      leave: id === 'services' ? () => { clearTimeout(this.ddT); this.ddT = setTimeout(() => this.setState({ dd: false }), 160); } : undefined
+    }));
+    const sheets = [['Top', 'top'], ['Services', 'services'], ['Recent work', 'work'], ['Service area', 'area'], ['Estimate', 'estimate']];
+    const indexLinks = sheets.map(([label, id], i) => ({
+      label, href: '#' + id, num: '0' + (i + 1),
+      color: active === id ? '#e9e9ed' : '#9fa1b0',
+      bg: active === id ? '#0035cc' : 'transparent',
+      onClick: this.go(id),
+      caret: id === 'services' ? 'ph ph-caret-down' : '',
+      enter: id === 'services' ? () => { clearTimeout(this.ddT); this.setState({ dd: true }); } : undefined,
+      leave: id === 'services' ? () => { clearTimeout(this.ddT); this.ddT = setTimeout(() => this.setState({ dd: false }), 160); } : undefined
+    }));
+    const footerLinks = [['Top', 'top'], ['Services', 'services'], ['Recent work', 'work'], ['Our story', 'Our Story.dc.html'], ['Service area', 'area'], ['Request a quote', 'estimate']]
+      .map(([label, id]) => ({ label, href: id.endsWith('.html') ? id : '#' + id, onClick: id.endsWith('.html') ? undefined : this.go(id) }));
+    const svc = [
+      { key: 'replacement', title: 'Roof replacement', short: 'a new roof', tag: 'Tear-off to final shingle', time: 'Usually 1–2 days on site',
+        body: "Full tear-off down to the deck, so we can see, and fix, what's underneath. You pick the shingle line and color before a single bundle goes up.",
+        inc: ['Tear-off of every old layer', 'Deck inspection and rotted-board replacement', 'Ice & water shield plus synthetic underlayment', 'New drip edge, flashing and pipe boots', 'Ridge ventilation', 'Magnet sweep and full cleanup'],
+        signs: ['Shingles curling, cracking or losing granules', 'Leaks in more than one spot', 'Roof is 20+ years old', 'Daylight or damp decking in the attic'],
+        photos: [['assets/work/step-finished.png', 'Finished replacement from the drone', 'center 45%'], ['assets/work/g-t4.jpg', 'Stripped to the deck boards'], ['assets/work/g-i1.jpg', 'New courses over underlayment']] },
+      { key: 'repair', title: 'Roof repair', short: 'a repair', tag: 'Leaks, flashing, storm patches', time: 'Most repairs in one visit',
+        body: "We trace the leak to its source, fix what's actually broken, and tell you honestly what can wait. No upsell to a full roof you don't need.",
+        inc: ['Leak tracing, inside and out', 'Matched shingle replacement', 'Chimney, wall and vent flashing', 'Pipe boot and vent replacement', 'Photos of the problem and the fix'],
+        signs: ['Water stains on a ceiling', 'Shingles missing after wind or hail', 'Drips around the chimney or a vent', 'Loose or lifted flashing'],
+        photos: [['assets/work/g-flashing.jpg', 'Re-flashing a brick chimney by hand', 'center 40%'], ['assets/work/g-repair.jpg', 'Storm patch, marked and re-nailed'], ['assets/work/tony-repair.jpg', 'Tony on a repair']] },
+      { key: 'gutters', title: 'Gutters', short: 'gutters', tag: 'Seamless, sized to your roof', time: 'Typically 1 day',
+        body: "Seamless gutters and downspouts sized to your roof's actual runoff, hung straight, pitched right, and routed so water ends up away from your foundation.",
+        inc: ['Seamless aluminum gutters, formed on site', 'Downspouts routed away from the house', 'Hidden hangers for a clean line', 'Optional gutter guards', 'Old gutter removal and haul-away'],
+        signs: ['Overflow during heavy rain', 'Sagging or pulling-away sections', 'Water pooling by the foundation', 'Peeling paint or rot on the fascia'],
+        photos: [['assets/work/g-a2.png', 'Finished roof edge and gable from above', 'center 60%'], ['assets/work/g-a6.png', 'Roof edges from the drone'], ['assets/work/g-a3.png', 'Overhead roof and eaves']] },
+      { key: 'siding', title: 'Siding', short: 'siding', tag: 'Vinyl and fiber cement', time: 'Depends on the house, we give dates up front',
+        body: "Vinyl and fiber-cement siding that squares up your home's whole face, often paired with a new roof for one clean project and one crew.",
+        inc: ['Vinyl and fiber-cement options', 'House wrap and moisture barrier', 'Trim, soffit and fascia', 'Color matching to your roof', 'One schedule if paired with a roof'],
+        signs: ['Warped, cracked or loose panels', 'Fading that paint won\'t fix', 'Soft spots or rot at the trim', 'Rising energy bills and drafts'],
+        photos: [['assets/work/g-after-p1.jpg', 'Front of a finished brick home', 'center 55%'], ['assets/work/after.jpg', 'Street view after the project'], ['assets/work/g-after-p2.jpg', 'Finished home, new roof']] }
+    ];
+    this.svcPhotos = svc.map(v => v.photos.map(([src, cap]) => ({ src, cap })));
+    const aSvc = this.state.activeSvc ?? 0;
+    const svcWide = w >= 1000;
+    const quote = key => e => {
+      const r = document.querySelector('input[name=service][value=' + key + ']');
+      if (r) r.checked = true;
+      this.go('estimate')(e);
+    };
+    const scale = (barPx - 8) / 309;
+    return {
+      panelHeight: docked ? `${barPx}px` : '100vh',
+      groupTransform: docked ? `translate(-50%,-50%) scale(${scale})` : 'translate(-50%,-50%) scale(1)',
+      topTransform: met ? 'translateY(0)' : 'translateY(-70vh)',
+      bottomTransform: met ? 'translateY(0)' : 'translateY(70vh)',
+      markShift: phase >= 2 ? 'translateY(0) scale(1)' : 'translateY(78px) scale(1.08)',
+      titleTransform: phase >= 2 ? 'translateY(0)' : 'translateY(105%)',
+      titleOpacity: phase >= 2 ? 1 : 0,
+      barHeight: `${barPx}px`,
+      navPointer: shown ? 'auto' : 'none',
+      ctaOpacity: shown ? 1 : 0,
+      ctaTransform: shown ? 'translateX(0)' : 'translateX(-16px)',
+      phoneDelay: shown ? '120ms' : '0ms',
+      ctaDelay: shown ? '220ms' : '0ms',
+      panelTransform: this.state.panelIn ? 'translateX(0)' : 'translateX(18%)',
+      panelClip: this.state.panelIn ? 'inset(0 0 0 0 round 16px 0 0 0)' : 'inset(0 0 0 100% round 16px 0 0 0)',
+      heroOpacity: shown ? 1 : 0,
+      heroTransform: shown ? 'translateY(0)' : 'translateY(28px)',
+      wide, narrow: !wide,
+      leftLinks, indexLinks, footerLinks,
+      indexVisible: idx && w >= 1440 && shown,
+      services: svc.map((v, i) => ({ ...v, id: 'svc-' + (i + 1), num: '0' + (i + 1), img: v.photos[0][0], alt: v.photos[0][1], pos: v.photos[0][2],
+        open0: () => this.setState({ lbSet: 'svc' + i, lb: 0 }),
+        thumbs: v.photos.slice(1).map(([src, cap], j) => ({ src, cap, open: () => this.setState({ lbSet: 'svc' + i, lb: j + 1 }) })),
+        quote: quote(v.key), page: ({ replacement: 'Roof Replacement.dc.html', repair: 'Roof Repair.dc.html', gutters: 'Gutters.dc.html', siding: 'Siding.dc.html' })[v.key] })),
+      svcNav: svc.map((v, i) => { const on = aSvc === i; return { num: '0' + (i + 1), title: v.title, tag: v.tag, href: '#svc-' + (i + 1), go: this.go('svc-' + (i + 1)), cur: on ? 'true' : 'false',
+        rowBg: on ? 'rgba(245,245,247,.07)' : 'transparent', dotBg: on ? '#0035cc' : (i < aSvc ? 'rgba(245,245,247,.14)' : 'transparent'), dotBd: on ? '#0a45e0' : 'rgba(245,245,247,.3)', dotFg: on || i < aSvc ? '#f5f5f7' : '#9fa1b0',
+        fgT: on ? '#f5f5f7' : '#c9cbe0', fgS: on ? '#c9cbe0' : '#8a8ca0', arrow: on ? 1 : 0, rows: on ? '1fr' : '0fr', thumb: v.photos[0][0], line: i < svc.length - 1 ? 'block' : 'none',
+        bg: on ? '#161826' : 'rgba(245,245,247,.5)', fg: on ? '#f5f5f7' : '#161826', bd: on ? '#161826' : 'rgba(22,24,38,.4)' }; }),
+      svcWide, svcNarrow: !svcWide, svcProg: ((aSvc + 1) / svc.length * 100) + '%', svcCounter: '0' + (aSvc + 1) + ' / 0' + svc.length, svcCols: svcWide ? 'minmax(220px,300px) minmax(0,1fr)' : 'minmax(0,1fr)',
+      ...this.workVals(w),
+      swapWord: this.swapWord(),
+      menuPages: [['Roof replacement', 'Roof Replacement.dc.html'], ['Roof repair', 'Roof Repair.dc.html'], ['Gutters', 'Gutters.dc.html'], ['Siding', 'Siding.dc.html'], ['Our story', 'Our Story.dc.html']].map(([label, href]) => ({ label, href })),
+      ddOpen: !!this.state.dd && wide && shown,
+      ddEnter: () => { clearTimeout(this.ddT); this.setState({ dd: true }); },
+      ddLeave: () => { clearTimeout(this.ddT); this.ddT = setTimeout(() => this.setState({ dd: false }), 160); },
+      ddAll: '#services',
+      ddItems: [['Roof replacement', 'Tear-off to final shingle', 'Roof Replacement.dc.html', 'assets/work/step-finished.png'], ['Roof repair', 'Leaks, flashing, storm patches', 'Roof Repair.dc.html', 'assets/work/g-flashing.jpg'], ['Gutters', 'Seamless, sized to your roof', 'Gutters.dc.html', 'assets/work/g-a2.png'], ['Siding', 'Vinyl and fiber cement', 'Siding.dc.html', 'assets/work/ba-after.png']].map(([title, tag, href, img]) => ({ title, tag, href, img, bg: `url("${img}")` })),
+      ...this.areaVals(wide),
+      baAngles: [
+        ['assets/work/ba-after.png', 'Street', 'The finished house from the street', 'center 45%'],
+        ['assets/work/after.jpg', 'Golden hour', 'The finished house at golden hour', 'center 55%'],
+        ['assets/work/step-finished.png', 'Drone front', 'Drone view of the finished front slope', 'center 50%'],
+        ['assets/work/g-a3.png', 'Overhead', 'Straight down on the new roof and dormer', 'center 50%'],
+        ['assets/work/g-a4.png', 'Drone rear', 'Drone view from behind the house', 'center 50%']
+      ].map(([src, label, alt, pos], i) => { const on = (this.state.baAngle ?? 0) === i; return { src, bg: `url("${src}")`, label, alt, pos, on: on ? 'true' : 'false', op: on ? 1 : 0, tf: on ? 'scale(1)' : 'scale(1.06)', bd: on ? '#f5f5f7' : 'rgba(245,245,247,.25)', thumbOp: on ? 1 : 0.7, pick: () => this.setState({ baAngle: i }) }; }),
+      baDuring: [
+        ['assets/work/step-protect.jpg', 'Protect', 'Day 1'], ['assets/work/step-tearoff.png', 'Tear-off', 'Day 1'], ['assets/work/g-t4.jpg', 'Deck check', 'Day 1'],
+        ['assets/work/step-install.png', 'Underlayment', 'Day 2'], ['assets/work/g-i1.jpg', 'Shingles', 'Day 2']
+      ].map(([src, label, n], i) => ({ id: 'ba-d' + i, src, bg: `url("${src}")`, label, n })),
+      baHoldOn: e => { this.baHold = true; this.baTick(window.innerHeight); },
+      baHoldOff: () => { this.baHold = false; this.baTick(window.innerHeight); },
+      baKeyOn: e => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); this.baHold = true; this.baTick(window.innerHeight); } },
+      menuVisible: !wide && menu && shown,
+      menuIcon: menu ? 'ph ph-x' : 'ph ph-list',
+      toggleMenu: () => this.setState(s => ({ menu: !s.menu })),
+      goTop: this.go('top'), goEstimate: this.go('estimate'),
+      submitted, notSubmitted: !submitted,
+      submit: e => { e.preventDefault(); this.setState({ submitted: true }); },
+      resetForm: () => this.setState({ submitted: false }),
+      replay: () => { window.scrollTo(0, 0); this.run(); }
+    };
+  }
+}
+</script>
+</body>
+</html>
