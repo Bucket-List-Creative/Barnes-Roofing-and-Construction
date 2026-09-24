@@ -21,7 +21,10 @@ a:hover{color:inherit}
 @keyframes bwIn{from{transform:translateY(55%);opacity:0;filter:blur(8px)}to{transform:none;opacity:1;filter:blur(0)}}
 @keyframes bwDrop{0%{transform:translateY(-140%) scale(.5) rotate(-12deg);opacity:0}60%{transform:translateY(10%) scale(1.06);opacity:1}100%{transform:none;opacity:1}}
 @keyframes bwBar{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-@media (prefers-reduced-motion:reduce){[data-bw]{animation:none!important}}
+.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0}
+.hero-overlay{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(8,10,20,.58) 0%,rgba(8,10,20,.3) 34%,rgba(8,10,20,.48) 72%,rgba(8,10,20,.76) 100%),linear-gradient(90deg,rgba(0,32,138,.38) 0%,rgba(0,53,204,.08) 48%,rgba(8,10,20,.3) 100%)}
+.hero-content{position:relative;z-index:2;text-shadow:0 3px 28px rgba(0,0,0,.45)}
+@media (prefers-reduced-motion:reduce){[data-bw]{animation:none!important}.hero-video{display:none}}
 </style>
 </helmet>
 <div style="position:relative;min-height:100vh;background:#9c9a9a;color:#161826">
@@ -88,18 +91,19 @@ a:hover{color:inherit}
 
   
   <main>
-    <section id="top" data-screen-label="Hero" style="position:relative;min-height:100vh;display:flex;align-items:center;padding:calc(128px + 7vh) clamp(16px,4vw,48px) 10vh;background:radial-gradient(90% 70% at 15% 30%, #adabab 0%, #9c9a9a 70%)">
-      
-    <div style="width:100%;max-width:1280px;margin:0 auto;display:flex;flex-direction:column;align-items:center;text-align:center;gap:var(--space-8);transition:opacity 900ms ease 200ms, transform 1000ms cubic-bezier(.22,1,.36,1) 200ms;opacity:{{ heroOpacity }};transform:{{ heroTransform }}">
+    <section id="top" data-screen-label="Hero" style="position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;padding:calc(128px + 7vh) clamp(16px,4vw,48px) 10vh;background:#161826 url('assets/work/after.jpg') center/cover no-repeat">
+      <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="assets/work/after.jpg" aria-hidden="true"><source src="assets/Hero Background-VIDEO.mp4" type="video/mp4"></video>
+      <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="hero-content" style="width:100%;max-width:1280px;margin:0 auto;display:flex;flex-direction:column;align-items:center;text-align:center;gap:var(--space-8);transition:opacity 900ms ease 200ms, transform 1000ms cubic-bezier(.22,1,.36,1) 200ms;opacity:{{ heroOpacity }};transform:{{ heroTransform }}">
         
         <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
           
-  <img src="assets/roof-chevron.png" alt="" aria-hidden="true" style="display: block; width: 85px; max-width: none; aspect-ratio: 3.4/1; height: 65px; object-fit: fill; margin: 0 auto -4px"><div style="display:flex;align-items:center;justify-content:center;gap:var(--space-4);font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#161826">No job too big or small, we do them all</div>
-        </div><h1 style="margin:0 auto;max-width:none;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:800;font-size:clamp(52px,9vw,148px);line-height:.94;letter-spacing:-.02em;color:#161826;text-wrap:balance">A roof built {{ swapWord }}</h1>
-        <p style="margin:0 auto;max-width:60ch;font-size:clamp(16px,1.3vw,19px);line-height:1.6;color:#23253a;text-wrap:pretty">Roof replacement, repairs, gutters and siding across the St. Louis metro. One local crew from the first inspection to the final walk-through, and a straight answer every time you call.</p>
+  <img src="assets/roof-chevron.png" alt="" aria-hidden="true" style="display:block;width:85px;max-width:none;aspect-ratio:3.4/1;height:65px;object-fit:fill;margin:0 auto -4px;filter:brightness(0) invert(1)"><div style="display:flex;align-items:center;justify-content:center;gap:var(--space-4);font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#f5f5f7">No job too big or small, we do them all</div>
+        </div><h1 style="margin:0 auto;max-width:none;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:800;font-size:clamp(52px,9vw,148px);line-height:.94;letter-spacing:-.02em;color:#f5f5f7;text-wrap:balance">A roof built {{ swapWord }}</h1>
+        <p style="margin:0 auto;max-width:60ch;font-size:clamp(16px,1.3vw,19px);line-height:1.6;color:#f5f5f7;text-wrap:pretty">Roof replacement, repairs, gutters and siding across the St. Louis metro. One local crew from the first inspection to the final walk-through, and a straight answer every time you call.</p>
         <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:var(--space-4)">
           <a href="#estimate" onClick="{{ goEstimate }}" class="btn" style="padding:16px 28px;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;background:#0035cc;border-color:#0035cc;color:#e9e9ed" style-hover="background:#002aa8;border-color:#002aa8" style-active="background:#00208a">Get a free estimate<i class="ph ph-arrow-right"></i></a>
-          <a href="tel:+13142037003" class="btn" style="padding:16px 28px;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;border-color:#161826;color:#161826" style-hover="background:rgba(22,24,38,.08)" style-active="background:rgba(22,24,38,.16)"><i class="ph ph-phone"></i>Call (314) 203-7003</a>
+          <a href="tel:+13142037003" class="btn" style="padding:16px 28px;font-family:Archivo, var(--font-heading);font-stretch:125%;font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;border-color:#f5f5f7;color:#f5f5f7;background:rgba(22,24,38,.24);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)" style-hover="background:rgba(245,245,247,.14)" style-active="background:rgba(245,245,247,.22)"><i class="ph ph-phone"></i>Call (314) 203-7003</a>
         </div>
       </div></section>
 
@@ -646,9 +650,9 @@ class Component extends DCLogic {
       e('img', { src: 'assets/barnes-mark.png', alt: '', style: { height: '72%', width: 'auto', display: 'block' } }));
     const txt = { display: 'inline-block', animation: 'bwIn 600ms cubic-bezier(.22,1,.36,1) 80ms both' };
     let inner;
-    if (style === 'a') inner = [e('span', { key: 't' + i, 'data-bw': 1, style: { ...txt, color: '#0035cc' } }, word)];
+    if (style === 'a') inner = [e('span', { key: 't' + i, 'data-bw': 1, style: { ...txt, color: '#f5f5f7' } }, word)];
     else if (style === 'b') inner = [e('span', { key: 'p' + i, 'data-bw': 1, style: { display: 'inline-flex', alignItems: 'center', gap: '.18em', padding: '.02em .26em .06em', borderRadius: '.2em', background: 'radial-gradient(120% 140% at 20% 0%, #0a45e0 0%, #0035cc 55%, #002aa8 100%)', color: '#f5f5f7', boxShadow: '0 .12em .3em rgba(0,42,168,.3)', animation: 'bwIn 600ms cubic-bezier(.22,1,.36,1) both' } }, word)];
-    else inner = [e('span', { key: 't' + i, 'data-bw': 1, style: { ...txt, position: 'relative', color: '#161826' } }, word,
+    else inner = [e('span', { key: 't' + i, 'data-bw': 1, style: { ...txt, position: 'relative', color: '#f5f5f7' } }, word,
       e('span', { 'data-bw': 1, 'aria-hidden': true, style: { position: 'absolute', left: 0, right: 0, bottom: '-.02em', height: '.1em', borderRadius: '.05em', background: '#0035cc', transformOrigin: 'left', animation: 'bwBar 700ms cubic-bezier(.22,1,.36,1) 250ms both' } }))];
     return e('span', { style: { display: 'block', whiteSpace: 'nowrap', fontSize: 'min(1em, 11vw)', minHeight: '1.05em' } },
       e('span', { className: 'sr', style: { position: 'absolute', width: 1, height: 1, overflow: 'hidden', clip: 'rect(0 0 0 0)' } }, 'right.'),
